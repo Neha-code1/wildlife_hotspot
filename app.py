@@ -202,7 +202,7 @@ with right:
         labels={'importance': 'Mean SHAP Value', 'feature': 'Feature'},
     )
     fig2.update_layout(
-        height=320, showlegend=False,
+        height=380,  margin=dict(l=160, r=20, t=20, b=60), showlegend=False,
         paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
         font=dict(color='#e6edf3'),
         xaxis=dict(gridcolor='#30363d'), yaxis=dict(gridcolor='#30363d')
