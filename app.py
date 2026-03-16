@@ -242,10 +242,11 @@ with right:
         st.markdown("**Why this score? (SHAP explanation)**")
 
         local_shap = shap_vals.iloc[idx]
-        shap_df = pd.DataFrame({
-            'feature': features,
-            'shap_value': local_shap.values
-        }).sort_values('shap_value')
+shap_df = pd.DataFrame({
+    'feature': [feature_labels[f] for f in features],
+    'shap_value': local_shap.values
+}).sort_values('shap_value')
+
 
         colors = []
         for v in shap_df['shap_value']:
