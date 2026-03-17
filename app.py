@@ -28,6 +28,7 @@ st.markdown("""
 .metric-value { font-size: 28px; font-weight: 700; color: #58a6ff; }
 .metric-label { font-size: 12px; color: #8b949e; margin-top: 4px; }
 .section-header { font-size:20px; font-weight:600; color:#e6edf3; margin:1rem 0 0.5rem; border-left:4px solid #238636; padding-left:12px; }
+.analysis-box { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 20px; margin-top: 1rem; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -86,6 +87,34 @@ feature_labels = {
     'survey_count': 'Survey Effort'
 }
 
+feature_explanations = {
+    'Vegetation Density': 'dense vegetation on both sides of the road reduces driver visibility and provides animals with cover right up to the road edge, making collisions more likely',
+    'Monsoon Season': 'monsoon season significantly increases animal movement as species migrate, forage, and breed — dramatically raising collision probability across all animal groups',
+    'Forest Cover %': 'high forest cover means more wildlife activity in the immediate vicinity of the road, with animals frequently crossing between habitat patches',
+    'Canopy Height': 'tall canopy indicates mature forest with high biodiversity and frequent large animal movement patterns',
+    'Road Length (km)': 'longer road segments expose more distance to wildlife crossing zones, increasing overall collision probability',
+    'Traffic Volume': 'higher traffic volume increases the probability of an animal-vehicle encounter during peak movement hours',
+    'Plantation Cover %': 'plantation edges are known wildlife movement corridors between habitat patches, particularly for small mammals and reptiles',
+    'Fencing Installed': 'absence of wildlife fencing means no physical barrier preventing animals from entering the road carriageway',
+    'Survey Effort': 'higher survey effort reflects more recorded incidents and greater monitoring attention in this area'
+}
+
+def get_risk_level(score):
+    if score > 0.65:
+        return "🔴 High"
+    elif score >= 0.45:
+        return "🟡 Moderate"
+    else:
+        return "🟢 Low"
+
+def get_map_color(score):
+    if score > 0.65:
+        return '#ff4444', 'HIGH RISK'
+    elif score >= 0.45:
+        return '#ffd700', 'MODERATE RISK'
+    else:
+        return '#44ff88', 'LOW RISK'
+
 st.title("🐾 Wildlife Roadkill Hotspot Predictor")
 st.markdown("**Anamalai Hills, Western Ghats** — Predictive AI model using NCF India field data (2011–2013)")
 st.markdown("Highways cutting through forest reserves cause thousands of animal-vehicle collisions every year. This system forecasts **where future collisions will occur** and explains **exactly why** — enabling forest officials to act before accidents happen.")
@@ -95,7 +124,7 @@ col1, col2, col3, col4 = st.columns(4)
 with col1:
     st.markdown(f'<div class="metric-card"><div class="metric-value">{len(df)}</div><div class="metric-label">Total Segments</div></div>', unsafe_allow_html=True)
 with col2:
-    st.markdown(f'<div class="metric-card"><div class="metric-value" style="color:#ff6b6b">{int((df["risk_probability"] >= 0.6).sum())}</div><div class="metric-label">High Risk Segments</div></div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="metric-card"><div class="metric-value" style="color:#ff6b6b">{int((df["risk_probability"] > 0.65).sum())}</div><div class="metric-label">High Risk Segments</div></div>', unsafe_allow_html=True)
 with col3:
     st.markdown(f'<div class="metric-card"><div class="metric-value">{int(df["incident_count"].sum())}</div><div class="metric-label">Total Incidents</div></div>', unsafe_allow_html=True)
 with col4:
@@ -119,25 +148,16 @@ transect_coords = {
 }
 
 st.markdown('<div class="section-header">Interactive Hotspot Map</div>', unsafe_allow_html=True)
-st.markdown("Click any marker to see risk details. Larger circles = higher risk. Red = high, orange = medium, green = low.")
+st.markdown("Click any marker to see risk details. Larger circles = higher risk. 🔴 Red = high, 🟡 Yellow = moderate, 🟢 Green = low.")
 
 m = folium.Map(location=[10.335, 76.940], zoom_start=13, tiles='CartoDB dark_matter')
-
 df_map = df.groupby('transect')['risk_probability'].max().reset_index()
 
 for _, row in df_map.iterrows():
     name = row['transect']
     risk = row['risk_probability']
     coords = transect_coords.get(name, (10.335, 76.940))
-    if risk >= 0.7:
-        color = '#ff4444'
-        risk_text = 'HIGH RISK'
-    elif risk >= 0.5:
-        color = '#ff8800'
-        risk_text = 'MEDIUM RISK'
-    else:
-        color = '#44ff88'
-        risk_text = 'LOW RISK'
+    color, risk_text = get_map_color(risk)
     incidents = int(df[df['transect'] == name]['incident_count'].sum())
     folium.CircleMarker(
         location=coords,
@@ -149,7 +169,7 @@ for _, row in df_map.iterrows():
         popup=folium.Popup(
             f"""<div style='font-family:Arial;min-width:160px'>
             <b style='font-size:14px'>{name}</b><br>
-            <span style='color:{"red" if risk>=0.7 else "orange" if risk>=0.5 else "green"};font-weight:bold'>{risk_text}</span><br>
+            <span style='color:{color};font-weight:bold'>{risk_text}</span><br>
             Risk Score: <b>{risk:.0%}</b><br>
             Total Incidents: <b>{incidents}</b>
             </div>""",
@@ -167,12 +187,10 @@ with left:
     st.markdown('<div class="section-header">Risk Probability by Segment</div>', unsafe_allow_html=True)
     df_sorted = df.sort_values('risk_probability', ascending=False)
     df_sorted['risk_pct'] = (df_sorted['risk_probability'] * 100).round(1)
-    df_sorted['status'] = df_sorted['risk_probability'].apply(
-        lambda s: "🔴 High" if s >= 0.7 else ("🟠 Medium" if s >= 0.5 else "🟢 Low")
-    )
+    df_sorted['status'] = df_sorted['risk_probability'].apply(get_risk_level)
     fig = px.bar(
         df_sorted, x='risk_pct', y='transect', color='risk_pct', orientation='h',
-        color_continuous_scale=['#44ff88', '#ff8800', '#ff4444'],
+        color_continuous_scale=['#44ff88', '#ffd700', '#ff8800', '#ff4444'],
         labels={'risk_pct': 'Risk (%)', 'transect': 'Segment'},
     )
     fig.update_layout(
@@ -202,7 +220,7 @@ with right:
         labels={'importance': 'Mean SHAP Value', 'feature': 'Feature'},
     )
     fig2.update_layout(
-        height=380,  margin=dict(l=160, r=20, t=20, b=60), showlegend=False,
+        height=380, margin=dict(l=160, r=20, t=20, b=60), showlegend=False,
         paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
         font=dict(color='#e6edf3'),
         xaxis=dict(gridcolor='#30363d'), yaxis=dict(gridcolor='#30363d')
@@ -220,10 +238,10 @@ with right:
         score = row['risk_probability'].values[0]
         incidents = row['incident_count'].values[0]
 
-        if score >= 0.7:
+        if score > 0.65:
             st.error(f"Risk Score: {score:.0%} — HIGH RISK")
-        elif score >= 0.5:
-            st.warning(f"Risk Score: {score:.0%} — MEDIUM RISK")
+        elif score >= 0.45:
+            st.warning(f"Risk Score: {score:.0%} — MODERATE RISK")
         else:
             st.success(f"Risk Score: {score:.0%} — LOW RISK")
 
@@ -262,11 +280,57 @@ with right:
         )
         st.plotly_chart(fig3, width='stretch')
 
+        # Detailed plain English analysis
         top_risk = shap_df[shap_df['shap_value'] > 0].sort_values('shap_value', ascending=False)
+        top_low = shap_df[shap_df['shap_value'] < -0.001].sort_values('shap_value')
+
         if len(top_risk) > 0:
-            top_feature = top_risk.iloc[0]['feature']
-            st.info(f"Biggest risk driver for **{selected}** ({selected_season}) is **{top_feature}**. "
-                    f"{int(incidents)} historical incidents. Predicted risk: {score:.0%}.")
+            top_features = top_risk['feature'].tolist()[:3]
+            risk_level_text = "critically high" if score > 0.8 else ("high" if score > 0.65 else ("moderate" if score >= 0.45 else "low"))
+            incident_context = (
+                "one of the most incident-prone stretches" if incidents > 200
+                else "a significantly incident-prone stretch" if incidents > 100
+                else "a stretch with growing incident risk" if score > 0.5
+                else "a stretch with few recorded incidents"
+            )
+
+            st.markdown("---")
+            st.markdown("### 📋 Segment Risk Analysis")
+
+            st.markdown(f"""
+**{selected}** during **{selected_season}** season has a **{risk_level_text} predicted collision risk of {score:.0%}**.
+
+**Historical Record:** {int(incidents)} animal-vehicle collisions have been documented on this segment, making it {incident_context} in the Anamalai Hills study area.
+""")
+
+            st.markdown("**Primary risk drivers identified by the model:**")
+            for i, feat in enumerate(top_features, 1):
+                if feat in feature_explanations:
+                    st.markdown(f"{i}. **{feat}** — {feature_explanations[feat]}.")
+
+            if len(top_low) > 0:
+                low_feat = top_low.iloc[0]['feature']
+                protection_text = {
+                    'Fencing Installed': 'existing wildlife fencing is providing measurable protection on this segment',
+                    'Monsoon Season': 'lower seasonal animal activity during summer is reducing overall risk',
+                    'Traffic Volume': 'relatively low traffic volume is limiting animal-vehicle encounter probability',
+                    'Vegetation Density': 'lower vegetation density is improving driver visibility on this stretch',
+                    'Forest Cover %': 'reduced forest cover in the immediate road vicinity is limiting wildlife crossings'
+                }
+                if low_feat in protection_text:
+                    st.markdown(f"\n**Protective factor:** {protection_text[low_feat]}.")
+
+            action = (
+                "**Recommended action:** Immediate infrastructure intervention required — prioritise wildlife underpasses, real-time animal detection systems, and mandatory speed reduction to 40 km/h during monsoon season."
+                if score > 0.65
+                else "**Recommended action:** Preventive measures advised — install wildlife warning signs, conduct night patrol surveys, and evaluate fencing feasibility for this stretch."
+                if score >= 0.45
+                else "**Recommended action:** Routine monitoring sufficient — maintain regular surveys and review if seasonal risk increases."
+            )
+            st.info(action)
+
+            if selected in ['Nallamudi', 'Neerar Dam', 'Chinnakallar']:
+                st.warning(f"🚨 **Emerging Hotspot Alert:** {selected} has been flagged as an emerging hotspot. Despite relatively moderate historical incident counts, the environmental conditions strongly predict escalating future risk. Early intervention is strongly recommended before this becomes a known blackspot.")
     else:
         st.warning("No data for this combination.")
 
@@ -323,7 +387,7 @@ scatter_df['risk_pct'] = (scatter_df['risk_probability'] * 100).round(1)
 scatter_df['type'] = scatter_df.apply(
     lambda r: '🚨 Emerging Hotspot' if r['risk_probability'] >= 0.4
     and r['incident_count'] <= df['incident_count'].quantile(0.6)
-    else ('🔴 Known Hotspot' if r['risk_probability'] >= 0.6 else '🟢 Low Risk'), axis=1
+    else ('🔴 Known Hotspot' if r['risk_probability'] > 0.65 else '🟢 Low Risk'), axis=1
 )
 
 fig6 = px.scatter(
@@ -366,5 +430,5 @@ else:
     st.info("No emerging hotspots detected.")
 
 st.markdown("---")
+st.caption("🔴 High Risk: >65% | 🟡 Moderate Risk: 45–65% | 🟢 Low Risk: <45%")
 st.caption("Data: Jeganathan et al. (2018) — NCF India | Model: XGBoost + SHAP | Built for wildlife conservation")
-
