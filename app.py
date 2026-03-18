@@ -245,14 +245,16 @@ with right:
     st.markdown("Which features drive risk across ALL segments?")
     shap_imp_display = shap_imp.copy()
     shap_imp_display['feature'] = shap_imp_display['feature'].map(feature_labels)
-    fig2 = px.bar(
-        shap_imp_display.sort_values('importance'),
-        x='importance', y='feature', orientation='h', color='importance',
-        color_continuous_scale=['#1f6feb', '#58a6ff'],
-        labels={'importance': 'Mean SHAP Value', 'feature': 'Feature'},
-    )
+    shap_imp_display = shap_imp_display.sort_values('importance', ascending=True)
+    fig2 = go.Figure(go.Bar(
+        x=shap_imp_display['importance'],
+        y=shap_imp_display['feature'],
+        orientation='h',
+        marker_color='#58a6ff',
+    ))
     fig2.update_layout(
-        height=380, margin=dict(l=160, r=20, t=20, b=60), showlegend=False,
+        height=380, margin=dict(l=160, r=20, t=20, b=60),
+        xaxis_title='Mean SHAP Value',
         paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
         font=dict(color='#e6edf3'),
         xaxis=dict(gridcolor='#30363d'), yaxis=dict(gridcolor='#30363d')
@@ -305,13 +307,14 @@ with right:
             textposition='outside'
         ))
         fig3.update_layout(
-            title='Red = increases risk | Blue = decreases risk | Gray = no effect',
             height=340, xaxis_title='SHAP Value',
             xaxis=dict(range=[-1, 1], gridcolor='#30363d'),
             paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
-            font=dict(color='#e6edf3')
+            font=dict(color='#e6edf3'),
+            margin=dict(t=20)
         )
         st.plotly_chart(fig3, width='stretch')
+        st.markdown("🔴 **Red** = increases risk &nbsp;|&nbsp; 🔵 **Blue** = decreases risk &nbsp;|&nbsp; ⚫ **Gray** = no effect", unsafe_allow_html=True)
 
         top_risk = shap_df[shap_df['shap_value'] > 0].sort_values('shap_value', ascending=False)
         top_low = shap_df[shap_df['shap_value'] < -0.001].sort_values('shap_value')
