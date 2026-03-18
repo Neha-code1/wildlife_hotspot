@@ -231,7 +231,7 @@ st.markdown("""
         <div class="hero-chip"><b>Feature Engineering</b> &nbsp;Environmental + Infrastructural + Temporal variables combined</div>
         <div class="hero-chip"><b>Algorithm</b> &nbsp;XGBoost Classifier</div>
         <div class="hero-chip"><b>Explainability</b> &nbsp;SHAP — Local &amp; Global</div>
-        <div class="hero-chip"><b>Output</b> &nbsp;Risk Score (0–100%) · 🔴 High &gt;75% · 🟡 Moderate 40–75% · 🟢 Low &lt;40%</div>
+        <div class="hero-chip"><b>Output</b> &nbsp;Risk Score (0–100%) · 🟢 Low &lt;40% · 🟡 Moderate 40–75% · 🔴 High &gt;75%</div>
     </div>
     <div class="delivers-box">
         <div style="font-size:12px; font-weight:700; color:#3fb950; margin-bottom:8px; letter-spacing:1px;">✅ WHAT THIS SYSTEM DELIVERS</div>
@@ -239,7 +239,7 @@ st.markdown("""
         <div class="delivers-item">✔️ &nbsp;<span><b>Local SHAP Explanations</b> — Why a specific stretch is risky, feature by feature</span></div>
         <div class="delivers-item">✔️ &nbsp;<span><b>Global SHAP Importance</b> — Which factors matter most across all segments</span></div>
         <div class="delivers-item">✔️ &nbsp;<span><b>Emerging Hotspot Detection</b> — Flags low-incident zones with high future risk (at least 3 identified)</span></div>
-        <div class="delivers-item">✔️ &nbsp;<span><b>Explainability Dashboard</b> — Visual interface with SHAP charts, risk maps, and plain-language insights for policymakers</span></div>
+        <div class="delivers-item">✔️ &nbsp;<span><b>Explainability Dashboard</b> — Visual interface with SHAP charts, risk maps, and simple insights for policymakers</span></div>
     </div>
     <div class="novelty-box">
         💡 <b>Novelty:</b> Unlike prior studies that only map historical incidents, this model
@@ -247,23 +247,29 @@ st.markdown("""
         can still be flagged High Risk if its environment is deteriorating. SHAP explanations make every
         prediction transparent and actionable for non-technical stakeholders.
     </div>
-    <div class="sdg-row">
-        <span style="font-size:12px; color:#8b949e; align-self:center; margin-right:4px;">🌐 Supports UN SDGs:</span>
-        <div style="display:inline-block;">
-            <span class="sdg-badge" style="background:#3f7e44; color:#fff;">SDG 15 · Life on Land</span>
-            <span class="sdg-note" style="color:#6abf69;">Protects terrestrial wildlife &amp; forest biodiversity</span>
-        </div>
-        <div style="display:inline-block;">
-            <span class="sdg-badge" style="background:#fd6925; color:#fff;">SDG 11 · Sustainable Cities</span>
-            <span class="sdg-note" style="color:#ffa07a;">Safer road infrastructure near forest zones</span>
-        </div>
-        <div style="display:inline-block;">
-            <span class="sdg-badge" style="background:#3f7e44; color:#fff;">SDG 13 · Climate Action</span>
-            <span class="sdg-note" style="color:#6abf69;">Reduces habitat fragmentation &amp; species vulnerability</span>
-        </div>
-        <div style="display:inline-block;">
-            <span class="sdg-badge" style="background:#4c9f38; color:#fff;">SDG 3 · Good Health &amp; Wellbeing</span>
-            <span class="sdg-note" style="color:#90ee90;">Reduces human injury from animal-vehicle collisions</span>
+    <div style="margin-top:16px;">
+        <div style="font-size:12px;color:#8b949e;margin-bottom:10px;">🌐 <b style="color:#e6edf3;">Supports UN SDGs:</b></div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+            <div style="background:#0d1a10;border:1px solid #3f7e44;border-radius:10px;padding:10px 12px;">
+                <span style="background:#3f7e44;color:#fff;border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;">SDG 15</span>
+                <div style="font-size:12px;color:#e6edf3;font-weight:600;margin:6px 0 2px;">Life on Land</div>
+                <div style="font-size:11px;color:#6abf69;line-height:1.4;">Protects terrestrial wildlife &amp; forest biodiversity</div>
+            </div>
+            <div style="background:#1a0e08;border:1px solid #fd6925;border-radius:10px;padding:10px 12px;">
+                <span style="background:#fd6925;color:#fff;border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;">SDG 11</span>
+                <div style="font-size:12px;color:#e6edf3;font-weight:600;margin:6px 0 2px;">Sustainable Cities</div>
+                <div style="font-size:11px;color:#ffa07a;line-height:1.4;">Safer road infrastructure near forest zones</div>
+            </div>
+            <div style="background:#0d1a10;border:1px solid #3f7e44;border-radius:10px;padding:10px 12px;">
+                <span style="background:#3f7e44;color:#fff;border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;">SDG 13</span>
+                <div style="font-size:12px;color:#e6edf3;font-weight:600;margin:6px 0 2px;">Climate Action</div>
+                <div style="font-size:11px;color:#6abf69;line-height:1.4;">Reduces habitat fragmentation &amp; species vulnerability</div>
+            </div>
+            <div style="background:#0d1a10;border:1px solid #4c9f38;border-radius:10px;padding:10px 12px;">
+                <span style="background:#4c9f38;color:#fff;border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;">SDG 3</span>
+                <div style="font-size:12px;color:#e6edf3;font-weight:600;margin:6px 0 2px;">Good Health &amp; Wellbeing</div>
+                <div style="font-size:11px;color:#90ee90;line-height:1.4;">Reduces human injury from animal-vehicle collisions</div>
+            </div>
         </div>
     </div>
 </div>
@@ -291,7 +297,7 @@ border-radius:14px;padding:20px 28px;margin-bottom:8px;">
     <div style="font-size:13px;font-weight:700;color:#58a6ff;margin-bottom:4px;">Step 2 — Inspect a Segment</div>
     <div style="font-size:12px;color:#8b949e;line-height:1.6;">Use the <b style="color:#e6edf3;">Inspect a Segment</b> dropdowns
     to select any road segment and season. The dashboard will show the predicted risk score,
-    SHAP feature contributions, a waterfall chart, and a plain-language explanation of <i>why</i> that segment is risky.</div>
+    SHAP feature contributions, a waterfall chart, and a simple explanation of <i>why</i> that segment is risky.</div>
   </div>
 
   <div style="background:#0d1117;border:1px solid #ff6b00;border-radius:10px;padding:14px 16px;">
@@ -352,43 +358,37 @@ st.markdown("---")
 # ── INCIDENT DISTRIBUTION TABLES ──────────────────────────────────────────────
 st.markdown('<div class="section-header">Incident Distribution across Segments</div>', unsafe_allow_html=True)
 
-seg_incidents = df[['transect', 'season', 'incident_count']].copy()
-seg_incidents.columns = ['Segment', 'Season', 'Total Incidents']
+seg_incidents = df.groupby('transect')['incident_count'].sum().reset_index()
+seg_incidents.columns = ['Segment', 'Total Incidents']
 seg_incidents = seg_incidents.sort_values('Total Incidents', ascending=False).reset_index(drop=True)
 seg_incidents.index += 1
 
-transect_totals = df.groupby('transect')['incident_count'].sum().reset_index()
-transect_totals.columns = ['Segment', 'Total Incidents']
-transect_totals = transect_totals.sort_values('Total Incidents', ascending=False).reset_index(drop=True)
-
-top5    = transect_totals.head(5).reset_index(drop=True)
-bottom5 = transect_totals.tail(5).reset_index(drop=True)
+top5    = seg_incidents.head(5).reset_index(drop=True)
+bottom5 = seg_incidents.tail(5).reset_index(drop=True)
 
 tc1, tc2, tc3 = st.columns(3)
 
 def make_table(rows, header_bg, header_color, row_hover):
     rows_html = ""
     for _, r in rows.iterrows():
-        rows_html += f"<tr><td style='padding:9px 14px;color:#e6edf3;border-bottom:1px solid rgba(255,255,255,0.05);'>{r['Segment']}</td><td style='padding:9px 14px;color:#8b949e;border-bottom:1px solid rgba(255,255,255,0.05);text-align:right;font-weight:600;color:{header_color};'>{int(r['Total Incidents'])}</td></tr>"
-    return f"""<table class="inc-table" style="background:#0d1117;border:1px solid {header_bg}33;border-radius:10px;overflow:hidden;">
+        rows_html += f"<tr><td style='padding:9px 14px;color:#e6edf3;border-bottom:1px solid rgba(255,255,255,0.05);'>{r['Segment']}</td><td style='padding:9px 14px;color:{header_color};border-bottom:1px solid rgba(255,255,255,0.05);text-align:right;font-weight:600;'>{int(r['Total Incidents'])}</td></tr>"
+    return f"""<table class="inc-table" style="background:#0d1117;border:1px solid {header_bg}33;border-radius:10px;overflow:hidden;width:100%;">
         <thead><tr style="background:{header_bg}22;">
             <th style="padding:10px 14px;text-align:left;color:{header_color};border-bottom:1px solid {header_bg}44;">Segment</th>
             <th style="padding:10px 14px;text-align:right;color:{header_color};border-bottom:1px solid {header_bg}44;">Total Incidents</th>
         </tr></thead><tbody>{rows_html}</tbody></table>"""
 
 with tc1:
-    st.markdown("**🌿 All Segments** *(sorted by incidents)*")
+    st.markdown("**🌿 All Segments** *(sorted by total incidents)*")
     all_rows_html = ""
     for i, r in seg_incidents.iterrows():
-        all_rows_html += f"<tr><td style='padding:8px 14px;color:#8b949e;border-bottom:1px solid rgba(255,255,255,0.05);font-size:12px;'>{i}</td><td style='padding:8px 14px;color:#e6edf3;border-bottom:1px solid rgba(255,255,255,0.05);font-size:12px;'>{r['Segment']}</td><td style='padding:8px 14px;color:#8b949e;border-bottom:1px solid rgba(255,255,255,0.05);font-size:12px;'>{r['Season']}</td><td style='padding:8px 14px;color:#58a6ff;border-bottom:1px solid rgba(255,255,255,0.05);font-size:12px;text-align:right;font-weight:600;'>{int(r['Total Incidents'])}</td></tr>"
-    st.markdown(f"""<div style="max-height:350px;overflow-y:auto;border-radius:10px;border:1px solid #1f6feb33;">
-        <table class="inc-table" style="background:#0d1117;">
-        <thead><tr style="background:#0d1a2a;position:sticky;top:0;">
+        all_rows_html += f"<tr><td style='padding:8px 14px;color:#8b949e;border-bottom:1px solid rgba(255,255,255,0.05);font-size:12px;'>{i}</td><td style='padding:8px 14px;color:#e6edf3;border-bottom:1px solid rgba(255,255,255,0.05);font-size:12px;'>{r['Segment']}</td><td style='padding:8px 14px;color:#58a6ff;border-bottom:1px solid rgba(255,255,255,0.05);font-size:12px;text-align:right;font-weight:600;'>{int(r['Total Incidents'])}</td></tr>"
+    st.markdown(f"""<table class="inc-table" style="background:#0d1117;border:1px solid #1f6feb33;border-radius:10px;overflow:hidden;width:100%;">
+        <thead><tr style="background:#0d1a2a;">
             <th style="padding:10px 14px;text-align:left;color:#58a6ff;border-bottom:1px solid #1f6feb44;">#</th>
             <th style="padding:10px 14px;text-align:left;color:#58a6ff;border-bottom:1px solid #1f6feb44;">Segment</th>
-            <th style="padding:10px 14px;text-align:left;color:#58a6ff;border-bottom:1px solid #1f6feb44;">Season</th>
             <th style="padding:10px 14px;text-align:right;color:#58a6ff;border-bottom:1px solid #1f6feb44;">Incidents</th>
-        </tr></thead><tbody>{all_rows_html}</tbody></table></div>""", unsafe_allow_html=True)
+        </tr></thead><tbody>{all_rows_html}</tbody></table>""", unsafe_allow_html=True)
 
 with tc2:
     st.markdown("**🔴 Highest Incident Areas**")
@@ -416,9 +416,10 @@ transect_coords = {
 }
 
 st.markdown('<div class="section-header">Interactive Hotspot Map</div>', unsafe_allow_html=True)
-st.markdown("Click any marker to see risk details. Larger circles = higher risk. 🔴 Red = high &nbsp;|&nbsp; 🟡 Yellow = moderate &nbsp;|&nbsp; 🟢 Green = low.")
+st.markdown("Click any marker to see risk details. Larger circles = higher risk. 🟢 Green = low &nbsp;|&nbsp; 🟡 Yellow = moderate &nbsp;|&nbsp; 🔴 Red = high.")
 
-m = folium.Map(location=[10.335, 76.940], zoom_start=13, tiles='CartoDB dark_matter')
+m = folium.Map(location=[10.335, 76.940], zoom_start=13, tiles='CartoDB dark_matter',
+               zoom_control=True, scrollWheelZoom=True)
 df_map = df.groupby('transect')['risk_probability'].max().reset_index()
 
 for _, row in df_map.iterrows():
@@ -457,6 +458,10 @@ with sel_col1:
 with sel_col2:
     selected_season = st.selectbox("Choose season:", ['monsoon', 'summer'])
 
+# Dynamic title after selection
+season_icon = '🌧️' if selected_season == 'monsoon' else '☀️'
+st.markdown(f'<div class="section-header">🔍 Inspecting: {selected} — {selected_season.capitalize()} {season_icon}</div>', unsafe_allow_html=True)
+
 row = df[(df['transect'] == selected) & (df['season'] == selected_season)]
 
 if len(row) > 0:
@@ -486,34 +491,49 @@ if len(row) > 0:
     with wf_col:
         st.markdown("**SHAP Waterfall — How each feature builds the final score**")
         base_val   = 0.5
-        shap_df_wf = shap_df[shap_df['shap_value'].abs() > 0.001].sort_values('shap_value', ascending=False)
+        shap_df_wf = shap_df[shap_df['shap_value'].abs() > 0.001].sort_values('shap_value')
+        
+        # Build proper waterfall from base
         cumulative = base_val
-        starts, ends, wf_labels, bar_colors = [], [], [], []
+        wf_data = []
         for _, wrow in shap_df_wf.iterrows():
-            starts.append(cumulative)
-            ends.append(cumulative + wrow['shap_value'])
-            wf_labels.append(wrow['feature'])
-            bar_colors.append('#ff4444' if wrow['shap_value'] > 0 else '#58a6ff')
+            wf_data.append({
+                'feature': wrow['feature'],
+                'start': cumulative,
+                'end': cumulative + wrow['shap_value'],
+                'value': wrow['shap_value'],
+                'color': '#ff4444' if wrow['shap_value'] > 0 else '#58a6ff'
+            })
             cumulative += wrow['shap_value']
 
         fig_wf = go.Figure()
-        for i in range(len(starts)):
+        # Base marker
+        fig_wf.add_trace(go.Scatter(
+            x=[base_val], y=[-0.5],
+            mode='markers', marker=dict(color='#8b949e', size=8, symbol='line-ew'),
+            showlegend=False, hoverinfo='skip'
+        ))
+        for d in wf_data:
             fig_wf.add_trace(go.Bar(
-                x=[ends[i] - starts[i]], y=[wf_labels[i]],
-                base=[starts[i]], orientation='h',
-                marker_color=bar_colors[i], showlegend=False,
-                text=f"{ends[i]-starts[i]:+.3f}", textposition='outside'
+                x=[d['end'] - d['start']], y=[d['feature']],
+                base=[d['start']], orientation='h',
+                marker_color=d['color'], showlegend=False,
+                text=f"{d['value']:+.3f}", textposition='outside',
+                textfont=dict(size=11)
             ))
-        fig_wf.add_vline(x=base_val, line_dash="dash", line_color="#8b949e",
-                         annotation_text=f"Base={base_val}", annotation_position="top")
-        fig_wf.add_vline(x=score, line_dash="dot", line_color="#ffd700",
-                         annotation_text=f"Final={score:.0%}", annotation_position="bottom")
+        fig_wf.add_vline(x=base_val, line_dash="dash", line_color="#8b949e", line_width=1.5,
+                         annotation_text=f"Base {base_val}", annotation_font_size=10,
+                         annotation_position="top right")
+        fig_wf.add_vline(x=score, line_dash="dot", line_color="#ffd700", line_width=2,
+                         annotation_text=f"Final {score:.0%}", annotation_font_size=10,
+                         annotation_position="bottom right")
         fig_wf.update_layout(
-            height=max(280, len(shap_df_wf) * 48),
-            xaxis=dict(range=[0, 1], gridcolor='#30363d', title='Risk Score'),
+            height=max(300, len(wf_data) * 50),
+            xaxis=dict(range=[0, 1.05], gridcolor='#30363d', title='Risk Score',
+                       tickformat='.0%', tickvals=[0, 0.25, 0.5, 0.75, 1.0]),
             paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
-            font=dict(color='#e6edf3'), margin=dict(l=10, r=50, t=20, b=30),
-            barmode='overlay'
+            font=dict(color='#e6edf3'), margin=dict(l=10, r=60, t=30, b=40),
+            barmode='overlay', bargap=0.3
         )
         st.plotly_chart(fig_wf, use_container_width=True)
 
@@ -541,7 +561,7 @@ if len(row) > 0:
 
     # ── ROW 2: SEGMENT RISK ANALYSIS — FULL WIDTH ──
     st.markdown("---")
-    st.markdown('<div class="section-header">Segment Risk Analysis</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="section-header">📋 Segment Risk Analysis — {selected} ({selected_season.capitalize()} {season_icon})</div>', unsafe_allow_html=True)
 
     risk_level_text = (
         "critically high" if score >= 0.8 else
@@ -648,6 +668,12 @@ st.markdown("---")
 # ── GLOBAL SHAP IMPORTANCE ────────────────────────────────────────────────────
 st.markdown('<div class="section-header">Global Feature Importance (SHAP)</div>', unsafe_allow_html=True)
 st.markdown("Which features drive risk across ALL segments?")
+st.markdown(
+    "<span style='font-size:12px;color:#8b949e;'>"
+    "🔵 <b style='color:#1f6feb;'>Darker blue</b> = lower importance &nbsp;→&nbsp; "
+    "💙 <b style='color:#58a6ff;'>Brighter blue</b> = higher importance"
+    "</span>", unsafe_allow_html=True
+)
 shap_imp_display = shap_imp.copy()
 shap_imp_display['feature'] = shap_imp_display['feature'].map(feature_labels)
 shap_imp_display = shap_imp_display.sort_values('importance', ascending=True)
@@ -751,17 +777,45 @@ high_df = df_sorted[df_sorted['risk_probability'] > 0.75][display_cols].rename(c
 mod_df  = df_sorted[(df_sorted['risk_probability'] >= 0.40) & (df_sorted['risk_probability'] <= 0.75)][display_cols].rename(columns=rename_map)
 low_df  = df_sorted[df_sorted['risk_probability'] < 0.40][display_cols].rename(columns=rename_map)
 
-# Fix empty rows — set height dynamically based on row count
-rc1, rc2, rc3 = st.columns(3)
-with rc1:
-    st.markdown("**🔴 High Risk** *(> 75%)*")
-    st.dataframe(high_df, hide_index=True, height=min(400, (len(high_df) + 1) * 45 + 10), use_container_width=True)
-with rc2:
-    st.markdown("**🟡 Moderate Risk** *(40–75%)*")
-    st.dataframe(mod_df, hide_index=True, height=min(400, (len(mod_df) + 1) * 45 + 10), use_container_width=True)
-with rc3:
-    st.markdown("**🟢 Low Risk** *(< 40%)*")
-    st.dataframe(low_df, hide_index=True, height=min(400, (len(low_df) + 1) * 45 + 10), use_container_width=True)
+def make_risk_table(data, border_color, text_color, header_bg):
+    if len(data) == 0:
+        return f"<div style='padding:20px;text-align:center;color:#6e7681;font-size:12px;background:#0d1117;border:1px solid {border_color}33;border-radius:10px;'>No segments in this category</div>"
+    rows_html = ""
+    for _, r in data.iterrows():
+        season_icon = '🌧️' if r['Season'] == 'monsoon' else '☀️'
+        rows_html += f"""<tr>
+            <td style='padding:10px 14px;color:#e6edf3;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:0;'>{r['Segment']}</td>
+            <td style='padding:10px 14px;color:#8b949e;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;white-space:nowrap;'>{r['Season']} {season_icon}</td>
+            <td style='padding:10px 14px;color:#8b949e;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;text-align:right;white-space:nowrap;'>{int(r['Incidents'])}</td>
+            <td style='padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.05);text-align:right;white-space:nowrap;'>
+                <span style='background:{border_color}22;color:{text_color};border:1px solid {border_color}66;
+                border-radius:20px;padding:4px 10px;font-size:12px;font-weight:700;'>{r['Risk (%)']:.1f}%</span>
+            </td>
+        </tr>"""
+    return f"""<table style="width:100%;border-collapse:collapse;background:#0d1117;
+        border:1px solid {border_color}44;border-radius:10px;overflow:hidden;table-layout:fixed;">
+        <colgroup>
+            <col style="width:30%;">
+            <col style="width:30%;">
+            <col style="width:17%;">
+            <col style="width:23%;">
+        </colgroup>
+        <thead><tr style="background:{header_bg};">
+            <th style="padding:10px 14px;text-align:left;color:{text_color};font-size:12px;border-bottom:1px solid {border_color}44;">Segment</th>
+            <th style="padding:10px 14px;text-align:left;color:{text_color};font-size:12px;border-bottom:1px solid {border_color}44;">Season</th>
+            <th style="padding:10px 14px;text-align:right;color:{text_color};font-size:12px;border-bottom:1px solid {border_color}44;">Inc.</th>
+            <th style="padding:10px 14px;text-align:right;color:{text_color};font-size:12px;border-bottom:1px solid {border_color}44;">Risk</th>
+        </tr></thead>
+        <tbody>{rows_html}</tbody>
+    </table>"""
+
+tab1, tab2, tab3 = st.tabs(["🔴 High Risk (> 75%)", "🟡 Moderate Risk (40–75%)", "🟢 Low Risk (< 40%)"])
+with tab1:
+    st.markdown(make_risk_table(high_df, '#ff4444', '#ff6b6b', '#1a0808'), unsafe_allow_html=True)
+with tab2:
+    st.markdown(make_risk_table(mod_df, '#ffd700', '#ffd700', '#1a1500'), unsafe_allow_html=True)
+with tab3:
+    st.markdown(make_risk_table(low_df, '#238636', '#3fb950', '#081a0a'), unsafe_allow_html=True)
 
 st.markdown("---")
 
@@ -827,18 +881,18 @@ st.markdown("Bottom-left zone = low history but high predicted risk = **emerging
 scatter_df = df.copy()
 scatter_df['risk_pct'] = (scatter_df['risk_probability'] * 100).round(1)
 scatter_df['type'] = scatter_df.apply(
-    lambda r: '🚨 Emerging Hotspot' if r['risk_probability'] >= 0.4
+    lambda r: 'Emerging Hotspot' if r['risk_probability'] >= 0.4
     and r['incident_count'] <= df['incident_count'].quantile(0.6)
-    else ('🔴 Known Hotspot' if r['risk_probability'] > 0.75 else '🟢 Low Risk'), axis=1
+    else ('Known Hotspot' if r['risk_probability'] > 0.75 else 'Low Risk'), axis=1
 )
 
 fig6 = px.scatter(
     scatter_df, x='incident_count', y='risk_pct', color='type', size='risk_pct',
     hover_data=['transect', 'season'],
     color_discrete_map={
-        '🚨 Emerging Hotspot': '#ffa94d',
-        '🔴 Known Hotspot':    '#ff4444',
-        '🟢 Low Risk':         '#44ff88'
+        'Emerging Hotspot': '#ffa94d',
+        'Known Hotspot':    '#ff4444',
+        'Low Risk':         '#44ff88'
     },
     labels={'incident_count': 'Historical Incidents', 'risk_pct': 'Predicted Risk (%)', 'type': 'Category'},
 )
