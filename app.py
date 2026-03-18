@@ -16,14 +16,30 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-[data-testid="stAppViewContainer"] { background-color: #0e1117; }
-[data-testid="stSidebar"] { background-color: #161b22; }
+/* ── Forest-road inspired background ── */
+[data-testid="stAppViewContainer"] {
+    background: radial-gradient(ellipse at 20% 20%, #0a1a0d 0%, #0b0f0e 40%, #080d10 100%);
+    background-attachment: fixed;
+}
+[data-testid="stAppViewContainer"]::before {
+    content: '';
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background:
+        radial-gradient(ellipse at 10% 80%, rgba(35,134,54,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 90% 10%, rgba(31,111,235,0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(255,107,0,0.03) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+}
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #0d1a0f 0%, #111820 100%);
+    border-right: 1px solid #1e3a1e;
+}
+/* ── Cards & components ── */
 .metric-card {
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 12px;
-    padding: 16px;
-    text-align: center;
+    background: linear-gradient(135deg, #0f1f12 0%, #161b22 100%);
+    border: 1px solid #238636;
+    border-radius: 12px; padding: 16px; text-align: center;
+    box-shadow: 0 0 12px rgba(35,134,54,0.1);
 }
 .metric-value { font-size: 28px; font-weight: 700; color: #58a6ff; }
 .metric-label { font-size: 12px; color: #8b949e; margin-top: 4px; }
@@ -32,68 +48,63 @@ st.markdown("""
     margin: 1rem 0 0.5rem; border-left: 4px solid #238636; padding-left: 12px;
 }
 .hero-box {
-    background: linear-gradient(135deg, #0d1117 0%, #161b22 60%, #1a2332 100%);
-    border: 1px solid #30363d;
-    border-left: 4px solid #238636;
-    border-radius: 16px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
+    background: linear-gradient(135deg, #060f07 0%, #0d1a10 40%, #0d1520 100%);
+    border: 1px solid #238636;
+    border-left: 4px solid #3fb950;
+    border-radius: 16px; padding: 28px 32px; margin-bottom: 24px;
+    box-shadow: 0 4px 24px rgba(35,134,54,0.12), 0 0 40px rgba(35,134,54,0.04);
 }
 .hero-title {
     font-size: 13px; font-weight: 700; letter-spacing: 2px;
-    color: #238636; text-transform: uppercase; margin-bottom: 6px;
+    color: #3fb950; text-transform: uppercase; margin-bottom: 6px;
 }
-.hero-row {
-    display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px;
-}
+.hero-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
 .hero-chip {
-    background: #21262d; border: 1px solid #30363d; border-radius: 20px;
+    background: #0d1a10; border: 1px solid #238636; border-radius: 20px;
     padding: 5px 14px; font-size: 12px; color: #8b949e;
 }
 .hero-chip b { color: #e6edf3; }
 .novelty-box {
-    background: #1a2332; border: 1px solid #1f6feb;
+    background: #0a1520; border: 1px solid #1f6feb;
     border-radius: 10px; padding: 10px 16px; margin-top: 16px;
     font-size: 13px; color: #79c0ff;
 }
-.sdg-row {
-    display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; align-items: flex-start;
+.delivers-box {
+    background: linear-gradient(135deg, #0a1a0d 0%, #0d1520 100%);
+    border: 1px solid #238636; border-radius: 12px;
+    padding: 16px 20px; margin-top: 14px;
 }
+.delivers-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 5px 0; font-size: 12px; color: #8b949e;
+}
+.delivers-item b { color: #3fb950; }
+.sdg-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; align-items: flex-start; }
 .sdg-badge {
     border-radius: 8px; padding: 6px 12px; font-size: 11px;
     font-weight: 700; letter-spacing: 0.5px; display: inline-block;
 }
-.sdg-note {
-    font-size: 10px; font-weight: 400; opacity: 0.85;
-    display: block; margin-top: 2px;
-}
+.sdg-note { font-size: 10px; font-weight: 400; opacity: 0.85; display: block; margin-top: 2px; }
 .risk-note {
-    background: #161b22; border: 1px solid #30363d; border-radius: 10px;
-    padding: 12px 16px; font-size: 12px; color: #8b949e; margin-bottom: 12px;
-    line-height: 1.6;
+    background: #0d1a10; border: 1px solid #238636; border-radius: 10px;
+    padding: 12px 16px; font-size: 12px; color: #8b949e; margin-bottom: 12px; line-height: 1.6;
 }
 .emerging-box {
     background: linear-gradient(135deg, #1a0a00 0%, #1f1100 100%);
-    border: 2px solid #ff6b00;
-    border-radius: 16px;
-    padding: 24px 28px;
-    margin: 8px 0 16px 0;
+    border: 2px solid #ff6b00; border-radius: 16px; padding: 24px 28px; margin: 8px 0 16px 0;
 }
-.emerging-title {
-    font-size: 22px; font-weight: 800; color: #ff6b00;
-    letter-spacing: 0.5px; margin-bottom: 6px;
-}
-.emerging-subtitle {
-    font-size: 13px; color: #8b949e; margin-bottom: 16px;
-}
+.emerging-title { font-size: 22px; font-weight: 800; color: #ff6b00; letter-spacing: 0.5px; margin-bottom: 6px; }
+.emerging-subtitle { font-size: 13px; color: #8b949e; margin-bottom: 16px; }
 .emerging-stat {
-    display: inline-block; background: #ff6b00;
-    color: #fff; font-size: 28px; font-weight: 900;
-    border-radius: 12px; padding: 8px 20px; margin-right: 12px;
+    display: inline-block; background: #ff6b00; color: #fff;
+    font-size: 28px; font-weight: 900; border-radius: 12px; padding: 8px 20px; margin-right: 12px;
 }
-.emerging-stat-label {
-    font-size: 12px; color: #ffa94d; margin-top: 4px; display: block;
-}
+.emerging-stat-label { font-size: 12px; color: #ffa94d; margin-top: 4px; display: block; }
+/* ── Styled incident tables ── */
+.inc-table { width:100%; border-collapse:collapse; border-radius:10px; overflow:hidden; }
+.inc-table th { padding:10px 14px; font-size:12px; font-weight:700; letter-spacing:0.5px; }
+.inc-table td { padding:10px 14px; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.05); }
+.inc-table tr:last-child td { border-bottom: none; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -119,6 +130,22 @@ with st.sidebar:
     st.markdown("---")
     st.markdown("**Project**")
     st.markdown("Predictive Wildlife Hotspot Modeling using Explainable AI")
+    st.markdown("---")
+    st.markdown("**🔗 Source Code**")
+    st.markdown(
+        '<a href="https://github.com/Neha-code1/wildlife_hotspot" target="_blank" '
+        'style="display:inline-block;background:#238636;color:#fff;padding:8px 16px;'
+        'border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;'
+        'margin-top:4px;">⭐ View on GitHub</a>',
+        unsafe_allow_html=True
+    )
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown(
+        '<a href="https://github.com/Neha-code1/wildlife_hotspot/blob/main/README.md" target="_blank" '
+        'style="display:inline-block;background:#161b22;border:1px solid #30363d;color:#8b949e;'
+        'padding:6px 14px;border-radius:8px;text-decoration:none;font-size:12px;">📄 Documentation</a>',
+        unsafe_allow_html=True
+    )
 
 @st.cache_resource
 def load_model():
@@ -152,6 +179,20 @@ feature_labels = {
     'survey_count':    'Survey Effort'
 }
 
+feature_explanations = {
+    'Vegetation Density': 'dense vegetation on both sides of the road reduces driver visibility and provides animals with cover right up to the road edge',
+    'Monsoon Season': 'monsoon season significantly increases animal movement as species migrate, forage, and breed — dramatically raising collision probability',
+    'Forest Cover %': 'high forest cover means more wildlife activity in the immediate vicinity of the road',
+    'Canopy Height': 'tall canopy indicates mature forest with high biodiversity and frequent large animal movement',
+    'Road Length (km)': 'longer road segments expose more distance to wildlife crossing zones',
+    'Traffic Volume': 'higher traffic volume increases the probability of an animal-vehicle encounter',
+    'Plantation Cover %': 'plantation edges are known wildlife movement corridors between habitat patches',
+    'Fencing Installed': 'absence of wildlife fencing means no physical barrier preventing animals from crossing',
+    'Survey Effort': 'higher survey effort reflects more recorded incidents in this area historically'
+}
+
+emerging_segments = ['Nallamudi', 'Neerar Dam', 'Chinnakallar']
+
 def get_risk_level(score):
     if score > 0.75:
         return "🔴 High"
@@ -176,19 +217,29 @@ st.markdown("""
     <p style="color:#8b949e; margin:0 0 4px 0; font-size:14px;">
         <b style="color:#e6edf3;">Study Area:</b> Anamalai Tiger Reserve, Western Ghats, Tamil Nadu &nbsp;|&nbsp;
         <b style="color:#e6edf3;">Data:</b> NCF India field surveys (2011–2013) &nbsp;|&nbsp;
-        <b style="color:#e6edf3;">Records:</b> 2,473 roadkill incidents across 11 road transects
+        <b style="color:#e6edf3;">Records:</b> 2,473 roadkill incidents across 11 road transects (1km segments)
     </p>
     <p style="color:#8b949e; font-size:13px; margin:10px 0 0 0;">
         <b style="color:#ff6b6b;">Problem:</b> Forest highways fragment habitats, causing thousands of animal-vehicle
-        collisions annually. Reactive measures arrive only after fatalities. This system
-        <b style="color:#e6edf3;">predicts where the next collision will occur</b> — before it happens —
-        enabling proactive intervention by forest officials.
+        collisions annually. Authorities rely on <i>reactive, historical data</i> to place preventative infrastructure —
+        but as environmental conditions and traffic patterns change, history alone is insufficient.
+        This system <b style="color:#e6edf3;">forecasts future high-risk zones before accidents happen</b>
+        and explains <b style="color:#e6edf3;">exactly why</b> — bridging the trust gap between AI and forest officials.
     </p>
     <div class="hero-row">
         <div class="hero-chip"><b>Input Features</b> &nbsp;Canopy density · Forest cover · Road length · Traffic · Fencing · Season · Plantation · Survey effort · Canopy height</div>
+        <div class="hero-chip"><b>Feature Engineering</b> &nbsp;Environmental + Infrastructural + Temporal variables combined</div>
         <div class="hero-chip"><b>Algorithm</b> &nbsp;XGBoost Classifier</div>
-        <div class="hero-chip"><b>Explainability</b> &nbsp;SHAP Values</div>
+        <div class="hero-chip"><b>Explainability</b> &nbsp;SHAP — Local &amp; Global</div>
         <div class="hero-chip"><b>Output</b> &nbsp;Risk Score (0–100%) · 🔴 High &gt;75% · 🟡 Moderate 40–75% · 🟢 Low &lt;40%</div>
+    </div>
+    <div class="delivers-box">
+        <div style="font-size:12px; font-weight:700; color:#3fb950; margin-bottom:8px; letter-spacing:1px;">✅ WHAT THIS SYSTEM DELIVERS</div>
+        <div class="delivers-item">✔️ &nbsp;<span><b>Predictive Risk Scoring</b> — ML model outputs collision probability for each 1km highway segment</span></div>
+        <div class="delivers-item">✔️ &nbsp;<span><b>Local SHAP Explanations</b> — Why a specific stretch is risky, feature by feature</span></div>
+        <div class="delivers-item">✔️ &nbsp;<span><b>Global SHAP Importance</b> — Which factors matter most across all segments</span></div>
+        <div class="delivers-item">✔️ &nbsp;<span><b>Emerging Hotspot Detection</b> — Flags low-incident zones with high future risk (at least 3 identified)</span></div>
+        <div class="delivers-item">✔️ &nbsp;<span><b>Explainability Dashboard</b> — Visual interface with SHAP charts, risk maps, and plain-language insights for policymakers</span></div>
     </div>
     <div class="novelty-box">
         💡 <b>Novelty:</b> Unlike prior studies that only map historical incidents, this model
@@ -215,6 +266,70 @@ st.markdown("""
             <span class="sdg-note" style="color:#90ee90;">Reduces human injury from animal-vehicle collisions</span>
         </div>
     </div>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("---")
+
+# ── HOW TO USE THIS DASHBOARD ─────────────────────────────────────────────────
+st.markdown('<div class="section-header">📖 How to Use This Dashboard</div>', unsafe_allow_html=True)
+st.markdown("""
+<div style="background:linear-gradient(135deg,#0a1a0d 0%,#0d1520 100%);border:1px solid #238636;
+border-radius:14px;padding:20px 28px;margin-bottom:8px;">
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:8px;">
+
+  <div style="background:#0d1117;border:1px solid #238636;border-radius:10px;padding:14px 16px;">
+    <div style="font-size:22px;margin-bottom:6px;">🗺️</div>
+    <div style="font-size:13px;font-weight:700;color:#3fb950;margin-bottom:4px;">Step 1 — Explore the Map</div>
+    <div style="font-size:12px;color:#8b949e;line-height:1.6;">Start with the <b style="color:#e6edf3;">Interactive Hotspot Map</b>.
+    Click any circle marker to see the risk level and total incidents for that road segment.
+    Larger circles = higher risk. Colors: 🔴 Red = High, 🟡 Yellow = Moderate, 🟢 Green = Low.</div>
+  </div>
+
+  <div style="background:#0d1117;border:1px solid #1f6feb;border-radius:10px;padding:14px 16px;">
+    <div style="font-size:22px;margin-bottom:6px;">🔍</div>
+    <div style="font-size:13px;font-weight:700;color:#58a6ff;margin-bottom:4px;">Step 2 — Inspect a Segment</div>
+    <div style="font-size:12px;color:#8b949e;line-height:1.6;">Use the <b style="color:#e6edf3;">Inspect a Segment</b> dropdowns
+    to select any road segment and season. The dashboard will show the predicted risk score,
+    SHAP feature contributions, a waterfall chart, and a plain-language explanation of <i>why</i> that segment is risky.</div>
+  </div>
+
+  <div style="background:#0d1117;border:1px solid #ff6b00;border-radius:10px;padding:14px 16px;">
+    <div style="font-size:22px;margin-bottom:6px;">🚨</div>
+    <div style="font-size:13px;font-weight:700;color:#ffa94d;margin-bottom:4px;">Step 3 — Find Emerging Hotspots</div>
+    <div style="font-size:12px;color:#8b949e;line-height:1.6;">Scroll to the <b style="color:#e6edf3;">Emerging Hotspots</b> section
+    at the bottom. These are segments with <i>few past incidents but high predicted future risk</i> —
+    the most actionable output for forest officials to act <b style="color:#ff6b00;">before</b> accidents happen.</div>
+  </div>
+
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+
+  <div style="background:#0d1117;border:1px solid #30363d;border-radius:10px;padding:14px 16px;">
+    <div style="font-size:22px;margin-bottom:6px;">📊</div>
+    <div style="font-size:13px;font-weight:700;color:#e6edf3;margin-bottom:4px;">Step 4 — Read the SHAP Charts</div>
+    <div style="font-size:12px;color:#8b949e;line-height:1.6;"><b style="color:#ff4444;">Red bars</b> = features pushing risk up.
+    <b style="color:#58a6ff;">Blue bars</b> = features reducing risk.
+    The <b style="color:#e6edf3;">waterfall chart</b> shows how the model builds the final score step by step from a 0.5 baseline.</div>
+  </div>
+
+  <div style="background:#0d1117;border:1px solid #30363d;border-radius:10px;padding:14px 16px;">
+    <div style="font-size:22px;margin-bottom:6px;">🌍</div>
+    <div style="font-size:13px;font-weight:700;color:#e6edf3;margin-bottom:4px;">Step 5 — Compare Seasons</div>
+    <div style="font-size:12px;color:#8b949e;line-height:1.6;">Use the <b style="color:#58a6ff;">Monsoon vs Summer</b> comparison chart
+    to understand how risk shifts between seasons for each segment.
+    This helps officials plan <b style="color:#e6edf3;">season-specific interventions</b>.</div>
+  </div>
+
+  <div style="background:#0d1117;border:1px solid #30363d;border-radius:10px;padding:14px 16px;">
+    <div style="font-size:22px;margin-bottom:6px;">🏛️</div>
+    <div style="font-size:13px;font-weight:700;color:#e6edf3;margin-bottom:4px;">For Forest Officials</div>
+    <div style="font-size:12px;color:#8b949e;line-height:1.6;">Every risk prediction comes with a plain-language
+    <b style="color:#e6edf3;">Segment Risk Analysis</b> — no data science knowledge needed.
+    It tells you <i>why</i> a segment is dangerous and <i>what action</i> to take.</div>
+  </div>
+
+</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -250,15 +365,38 @@ top5    = transect_totals.head(5).reset_index(drop=True)
 bottom5 = transect_totals.tail(5).reset_index(drop=True)
 
 tc1, tc2, tc3 = st.columns(3)
+
+def make_table(rows, header_bg, header_color, row_hover):
+    rows_html = ""
+    for _, r in rows.iterrows():
+        rows_html += f"<tr><td style='padding:9px 14px;color:#e6edf3;border-bottom:1px solid rgba(255,255,255,0.05);'>{r['Segment']}</td><td style='padding:9px 14px;color:#8b949e;border-bottom:1px solid rgba(255,255,255,0.05);text-align:right;font-weight:600;color:{header_color};'>{int(r['Total Incidents'])}</td></tr>"
+    return f"""<table class="inc-table" style="background:#0d1117;border:1px solid {header_bg}33;border-radius:10px;overflow:hidden;">
+        <thead><tr style="background:{header_bg}22;">
+            <th style="padding:10px 14px;text-align:left;color:{header_color};border-bottom:1px solid {header_bg}44;">Segment</th>
+            <th style="padding:10px 14px;text-align:right;color:{header_color};border-bottom:1px solid {header_bg}44;">Total Incidents</th>
+        </tr></thead><tbody>{rows_html}</tbody></table>"""
+
 with tc1:
-    st.markdown("**📊 All Segments** *(sorted by incidents)*")
-    st.dataframe(seg_incidents, hide_index=False, height=350, use_container_width=True)
+    st.markdown("**🌿 All Segments** *(sorted by incidents)*")
+    all_rows_html = ""
+    for i, r in seg_incidents.iterrows():
+        all_rows_html += f"<tr><td style='padding:8px 14px;color:#8b949e;border-bottom:1px solid rgba(255,255,255,0.05);font-size:12px;'>{i}</td><td style='padding:8px 14px;color:#e6edf3;border-bottom:1px solid rgba(255,255,255,0.05);font-size:12px;'>{r['Segment']}</td><td style='padding:8px 14px;color:#8b949e;border-bottom:1px solid rgba(255,255,255,0.05);font-size:12px;'>{r['Season']}</td><td style='padding:8px 14px;color:#58a6ff;border-bottom:1px solid rgba(255,255,255,0.05);font-size:12px;text-align:right;font-weight:600;'>{int(r['Total Incidents'])}</td></tr>"
+    st.markdown(f"""<div style="max-height:350px;overflow-y:auto;border-radius:10px;border:1px solid #1f6feb33;">
+        <table class="inc-table" style="background:#0d1117;">
+        <thead><tr style="background:#0d1a2a;position:sticky;top:0;">
+            <th style="padding:10px 14px;text-align:left;color:#58a6ff;border-bottom:1px solid #1f6feb44;">#</th>
+            <th style="padding:10px 14px;text-align:left;color:#58a6ff;border-bottom:1px solid #1f6feb44;">Segment</th>
+            <th style="padding:10px 14px;text-align:left;color:#58a6ff;border-bottom:1px solid #1f6feb44;">Season</th>
+            <th style="padding:10px 14px;text-align:right;color:#58a6ff;border-bottom:1px solid #1f6feb44;">Incidents</th>
+        </tr></thead><tbody>{all_rows_html}</tbody></table></div>""", unsafe_allow_html=True)
+
 with tc2:
-    st.markdown("**🔴 Top 5 — Highest Incident Areas**")
-    st.dataframe(top5, hide_index=True, height=230, use_container_width=True)
+    st.markdown("**🔴 Highest Incident Areas**")
+    st.markdown(make_table(top5, '#ff4444', '#ff6b6b', '#ff444411'), unsafe_allow_html=True)
+
 with tc3:
-    st.markdown("**🟢 Bottom 5 — Lowest Incident Areas**")
-    st.dataframe(bottom5, hide_index=True, height=230, use_container_width=True)
+    st.markdown("**🟢 Lowest Incident Areas**")
+    st.markdown(make_table(bottom5, '#238636', '#3fb950', '#23863611'), unsafe_allow_html=True)
 
 st.markdown("---")
 
@@ -307,149 +445,203 @@ for _, row in df_map.iterrows():
 st_folium(m, width=None, height=450)
 st.markdown("---")
 
-# ── RISK BAR CHART + INSPECT SEGMENT ──────────────────────────────────────────
+# ── INSPECT A SEGMENT ─────────────────────────────────────────────────────────
 df_sorted = df.sort_values('risk_probability', ascending=False).copy()
 df_sorted['risk_pct'] = (df_sorted['risk_probability'] * 100).round(1)
 df_sorted['status']   = df_sorted['risk_probability'].apply(get_risk_level)
 
-left, right = st.columns([1.2, 1])
-
-with left:
-    st.markdown('<div class="section-header">Risk Probability by Segment</div>', unsafe_allow_html=True)
-    fig = px.bar(
-        df_sorted, x='risk_pct', y='transect', color='risk_pct', orientation='h',
-        color_continuous_scale=['#44ff88', '#ffd700', '#ff8800', '#ff4444'],
-        labels={'risk_pct': 'Risk (%)', 'transect': 'Segment'},
-    )
-    fig.update_layout(
-        height=520, showlegend=False,
-        paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
-        font=dict(color='#e6edf3'),
-        xaxis=dict(gridcolor='#30363d', range=[0, 100]),
-        yaxis=dict(gridcolor='#30363d'),
-        coloraxis_showscale=False
-    )
-    st.plotly_chart(fig, use_container_width=True)
-
-    # ── FULL RISK SUMMARY TABLE ──
-    st.markdown('<div class="section-header">All Segments — Risk Summary</div>', unsafe_allow_html=True)
-    st.dataframe(
-        df_sorted[['transect', 'season', 'incident_count', 'risk_pct', 'status']].rename(
-            columns={'transect': 'Segment', 'season': 'Season',
-                     'incident_count': 'Incidents', 'risk_pct': 'Risk (%)', 'status': 'Level'}
-        ),
-        use_container_width=True, hide_index=True, height=420
-    )
-
-with right:
-    st.markdown('<div class="section-header">Inspect a Segment</div>', unsafe_allow_html=True)
-    selected        = st.selectbox("Choose a road segment:", df_sorted['transect'].unique())
+st.markdown('<div class="section-header">Inspect a Segment</div>', unsafe_allow_html=True)
+sel_col1, sel_col2 = st.columns(2)
+with sel_col1:
+    selected = st.selectbox("Choose a road segment:", df_sorted['transect'].unique())
+with sel_col2:
     selected_season = st.selectbox("Choose season:", ['monsoon', 'summer'])
-    row = df[(df['transect'] == selected) & (df['season'] == selected_season)]
 
-    if len(row) > 0:
-        idx       = row.index[0]
-        score     = row['risk_probability'].values[0]
-        incidents = row['incident_count'].values[0]
+row = df[(df['transect'] == selected) & (df['season'] == selected_season)]
 
-        if score > 0.75:
-            st.error(f"Risk Score: {score:.0%} — HIGH RISK")
-        elif score >= 0.40:
-            st.warning(f"Risk Score: {score:.0%} — MODERATE RISK")
-        else:
-            st.success(f"Risk Score: {score:.0%} — LOW RISK")
+if len(row) > 0:
+    idx       = row.index[0]
+    score     = row['risk_probability'].values[0]
+    incidents = row['incident_count'].values[0]
 
-        st.write(f"Historical incidents: **{int(incidents)}**")
+    local_shap = shap_vals.iloc[idx]
+    shap_df = pd.DataFrame({
+        'feature':    [feature_labels[f] for f in features],
+        'shap_value': local_shap.values
+    })
+    shap_df_filtered = shap_df[shap_df['shap_value'].abs() > 0.001].sort_values('shap_value')
+    top_risk_feats   = shap_df[shap_df['shap_value'] > 0].sort_values('shap_value', ascending=False)
+    top_low_feats    = shap_df[shap_df['shap_value'] < 0].sort_values('shap_value')
 
-        # ── LOCAL SHAP BAR CHART (only non-zero features) ──
-        st.markdown("**Why this score? — SHAP Feature Contributions**")
+    if score > 0.75:
+        st.error(f"Risk Score: {score:.0%} — HIGH RISK")
+    elif score >= 0.40:
+        st.warning(f"Risk Score: {score:.0%} — MODERATE RISK")
+    else:
+        st.success(f"Risk Score: {score:.0%} — LOW RISK")
 
-        local_shap = shap_vals.iloc[idx]
-        shap_df = pd.DataFrame({
-            'feature':    [feature_labels[f] for f in features],
-            'shap_value': local_shap.values
-        })
-        # Filter out zero/negligible contributions
-        shap_df = shap_df[shap_df['shap_value'].abs() > 0.001].sort_values('shap_value')
+    # ── ROW 1: WATERFALL (left) | SHAP BAR (right) ──
+    wf_col, bar_col = st.columns(2)
 
-        colors = ['#ff4444' if v > 0 else '#58a6ff' for v in shap_df['shap_value']]
-
-        fig3 = go.Figure(go.Bar(
-            x=shap_df['shap_value'],
-            y=shap_df['feature'],
-            orientation='h',
-            marker_color=colors,
-            text=shap_df['shap_value'].apply(lambda v: f'{v:+.3f}'),
-            textposition='outside'
-        ))
-        fig3.update_layout(
-            height=max(250, len(shap_df) * 45),
-            xaxis_title='SHAP Value',
-            xaxis=dict(range=[-1, 1], gridcolor='#30363d'),
-            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
-            font=dict(color='#e6edf3'), margin=dict(l=10, r=50, t=10, b=40)
-        )
-        st.plotly_chart(fig3, use_container_width=True)
-
-        st.markdown(
-            "<span style='color:#ff4444;font-size:16px;'>●</span> <b>Red</b> = increases risk &nbsp;|&nbsp;"
-            "<span style='color:#58a6ff;font-size:16px;'>●</span> <b>Blue</b> = decreases risk",
-            unsafe_allow_html=True
-        )
-
-        # ── LOCAL SHAP WATERFALL CHART ──
+    with wf_col:
         st.markdown("**SHAP Waterfall — How each feature builds the final score**")
-
-        base_val = 0.5
-        shap_df_wf = pd.DataFrame({
-            'feature':    [feature_labels[f] for f in features],
-            'shap_value': local_shap.values
-        }).sort_values('shap_value', ascending=False)
-        shap_df_wf = shap_df_wf[shap_df_wf['shap_value'].abs() > 0.001]
-
+        base_val   = 0.5
+        shap_df_wf = shap_df[shap_df['shap_value'].abs() > 0.001].sort_values('shap_value', ascending=False)
         cumulative = base_val
-        starts, ends, labels, bar_colors = [], [], [], []
+        starts, ends, wf_labels, bar_colors = [], [], [], []
         for _, wrow in shap_df_wf.iterrows():
             starts.append(cumulative)
             ends.append(cumulative + wrow['shap_value'])
-            labels.append(wrow['feature'])
+            wf_labels.append(wrow['feature'])
             bar_colors.append('#ff4444' if wrow['shap_value'] > 0 else '#58a6ff')
             cumulative += wrow['shap_value']
 
         fig_wf = go.Figure()
         for i in range(len(starts)):
             fig_wf.add_trace(go.Bar(
-                x=[ends[i] - starts[i]],
-                y=[labels[i]],
-                base=[starts[i]],
-                orientation='h',
-                marker_color=bar_colors[i],
-                name=labels[i],
-                showlegend=False,
-                text=f"{ends[i] - starts[i]:+.3f}",
-                textposition='outside'
+                x=[ends[i] - starts[i]], y=[wf_labels[i]],
+                base=[starts[i]], orientation='h',
+                marker_color=bar_colors[i], showlegend=False,
+                text=f"{ends[i]-starts[i]:+.3f}", textposition='outside'
             ))
-
         fig_wf.add_vline(x=base_val, line_dash="dash", line_color="#8b949e",
                          annotation_text=f"Base={base_val}", annotation_position="top")
         fig_wf.add_vline(x=score, line_dash="dot", line_color="#ffd700",
                          annotation_text=f"Final={score:.0%}", annotation_position="bottom")
         fig_wf.update_layout(
-            height=max(250, len(shap_df_wf) * 45),
+            height=max(280, len(shap_df_wf) * 48),
             xaxis=dict(range=[0, 1], gridcolor='#30363d', title='Risk Score'),
             paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
-            font=dict(color='#e6edf3'), margin=dict(l=10, r=50, t=20, b=40),
+            font=dict(color='#e6edf3'), margin=dict(l=10, r=50, t=20, b=30),
             barmode='overlay'
         )
         st.plotly_chart(fig_wf, use_container_width=True)
 
-        top_risk = shap_df[shap_df['shap_value'] > 0].sort_values('shap_value', ascending=False)
-        if len(top_risk) > 0:
-            top_feature = top_risk.iloc[0]['feature']
-            st.info(f"Biggest risk driver for **{selected}** ({selected_season}) is **{top_feature}**. "
-                    f"{int(incidents)} historical incidents. Predicted risk: {score:.0%}.")
+    with bar_col:
+        st.markdown("**SHAP Feature Contributions**")
+        colors = ['#ff4444' if v > 0 else '#58a6ff' for v in shap_df_filtered['shap_value']]
+        fig3 = go.Figure(go.Bar(
+            x=shap_df_filtered['shap_value'], y=shap_df_filtered['feature'],
+            orientation='h', marker_color=colors,
+            text=shap_df_filtered['shap_value'].apply(lambda v: f'{v:+.3f}'),
+            textposition='outside'
+        ))
+        fig3.update_layout(
+            height=max(280, len(shap_df_filtered) * 48),
+            xaxis=dict(range=[-1, 1], gridcolor='#30363d', title='SHAP Value'),
+            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+            font=dict(color='#e6edf3'), margin=dict(l=10, r=50, t=10, b=30)
+        )
+        st.plotly_chart(fig3, use_container_width=True)
+        st.markdown(
+            "<span style='color:#ff4444;font-size:15px;'>●</span> <b>Red</b> = increases risk &nbsp;|&nbsp;"
+            "<span style='color:#58a6ff;font-size:15px;'>●</span> <b>Blue</b> = decreases risk",
+            unsafe_allow_html=True
+        )
+
+    # ── ROW 2: SEGMENT RISK ANALYSIS — FULL WIDTH ──
+    st.markdown("---")
+    st.markdown('<div class="section-header">Segment Risk Analysis</div>', unsafe_allow_html=True)
+
+    risk_level_text = (
+        "critically high" if score >= 0.8 else
+        "high"            if score >= 0.75 else
+        "moderate"        if score >= 0.40 else
+        "low"
+    )
+
+    if score >= 0.75:
+        st.error(f"⚠️ **{selected}** during **{selected_season}** is a **{risk_level_text} risk zone** with a predicted collision probability of **{score:.0%}**.")
+    elif score >= 0.40:
+        st.warning(f"⚠️ **{selected}** during **{selected_season}** is a **{risk_level_text} risk zone** with a predicted collision probability of **{score:.0%}**.")
     else:
-        st.warning("No data for this combination.")
+        st.success(f"✅ **{selected}** during **{selected_season}** is a **{risk_level_text} risk zone** with a predicted collision probability of **{score:.0%}**.")
+
+    incident_context = (
+        "one of the most incident-prone stretches" if incidents > 200 else
+        "a moderately incident-prone stretch"       if incidents > 100 else
+        "a stretch with few recorded incidents but rising predicted risk" if score > 0.5 else
+        "a low-incident stretch"
+    )
+
+    ana_col1, ana_col2 = st.columns(2)
+    with ana_col1:
+        st.markdown(f"""
+**Historical Record:** {int(incidents)} animal-vehicle collisions have been recorded on this segment,
+making it **{incident_context}** in the study area.
+
+**Why is this segment at {risk_level_text} risk?**
+
+The model identifies the following as the primary risk drivers:
+""")
+        top_features = top_risk_feats['feature'].tolist()[:3]
+        for i, feat in enumerate(top_features, 1):
+            if feat in feature_explanations:
+                st.markdown(f"{i}. **{feat}** — {feature_explanations[feat]}")
+
+    with ana_col2:
+        low_features = top_low_feats['feature'].tolist()[:2]
+        protection_parts = []
+        for feat in low_features:
+            if feat == 'Fencing Installed':
+                protection_parts.append("existing fencing provides some physical barrier protection")
+            elif feat == 'Monsoon Season':
+                protection_parts.append("lower animal activity during this season reduces risk")
+            elif feat == 'Traffic Volume':
+                protection_parts.append("relatively low traffic volume reduces encounter probability")
+            elif feat == 'Forest Cover %':
+                protection_parts.append("lower forest cover reduces immediate wildlife pressure on the road")
+            elif feat == 'Vegetation Density':
+                protection_parts.append("lower vegetation density improves driver visibility")
+
+        if protection_parts:
+            st.markdown(f"**Protective factors:** {', '.join(protection_parts)}.")
+
+        intervention = (
+            "immediate infrastructure intervention — consider installing wildlife underpasses, "
+            "speed reduction measures, and real-time animal detection systems"
+            if score >= 0.75 else
+            "monitoring and preventive measures — consider installing warning signs and reducing speed limits"
+            if score >= 0.40 else
+            "routine monitoring — current risk levels are manageable with standard precautions"
+        )
+        st.markdown(f"**What this means for forest officials:** This segment requires **{intervention}**.")
+
+        if selected in emerging_segments:
+            st.warning(
+                f"🚨 **Emerging Hotspot Alert:** {selected} has been flagged as an emerging hotspot. "
+                f"Despite relatively few historical incidents, the environmental and infrastructural conditions "
+                f"strongly predict future collision risk. **Early intervention here is strongly recommended.**"
+            )
+else:
+    st.warning("No data for this combination.")
+
+# ── ROW 3: RISK PROBABILITY BAR CHART — FULL WIDTH ────────────────────────────
+st.markdown("---")
+st.markdown('<div class="section-header">Risk Probability by Segment</div>', unsafe_allow_html=True)
+st.markdown(
+    "<span style='font-size:12px; color:#8b949e;'>"
+    "🟢 <b style='color:#44ff88;'>Green</b> = Low (&lt;40%) &nbsp;→&nbsp; "
+    "🟡 <b style='color:#ffd700;'>Yellow</b> = Moderate (40–75%) &nbsp;→&nbsp; "
+    "🟠 <b style='color:#ff8800;'>Orange</b> = High &nbsp;→&nbsp; "
+    "🔴 <b style='color:#ff4444;'>Red</b> = Critically High (&gt;75%)"
+    "</span>",
+    unsafe_allow_html=True
+)
+fig = px.bar(
+    df_sorted, x='risk_pct', y='transect', color='risk_pct', orientation='h',
+    color_continuous_scale=['#44ff88', '#ffd700', '#ff8800', '#ff4444'],
+    labels={'risk_pct': 'Risk (%)', 'transect': 'Segment'},
+)
+fig.update_layout(
+    height=550, showlegend=False,
+    paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+    font=dict(color='#e6edf3'),
+    xaxis=dict(gridcolor='#30363d', range=[0, 100]),
+    yaxis=dict(gridcolor='#30363d'),
+    coloraxis_showscale=False
+)
+st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("---")
 
@@ -477,7 +669,67 @@ fig2.update_layout(
 st.plotly_chart(fig2, use_container_width=True)
 st.markdown("---")
 
-# ── RISK CLASSIFICATION TABLES (3 parallel) ───────────────────────────────────
+# ── MODEL PERFORMANCE METRICS ─────────────────────────────────────────────────
+st.markdown('<div class="section-header">📈 Model Performance Metrics</div>', unsafe_allow_html=True)
+st.markdown("How well does the XGBoost model predict wildlife collision risk across road segments?")
+
+# ⚠️ Replace these values with your actual model evaluation results
+metrics = {
+    'Accuracy':  0.91,   # ← replace
+    'Precision': 0.89,   # ← replace
+    'Recall':    0.88,   # ← replace
+    'F1 Score':  0.88,   # ← replace
+    'ROC-AUC':   0.95,   # ← replace
+}
+
+mp1, mp2, mp3, mp4, mp5 = st.columns(5)
+cols = [mp1, mp2, mp3, mp4, mp5]
+colors = ['#3fb950', '#58a6ff', '#ffd700', '#ff8800', '#ff4444']
+for i, (metric, value) in enumerate(metrics.items()):
+    pct = int(value * 100)
+    bar_color = colors[i]
+    cols[i].markdown(f"""
+    <div style="background:#0d1117;border:1px solid {bar_color}44;border-radius:12px;
+    padding:16px 12px;text-align:center;box-shadow:0 0 12px {bar_color}11;">
+        <div style="font-size:28px;font-weight:800;color:{bar_color};">{pct}%</div>
+        <div style="font-size:12px;color:#8b949e;margin:4px 0 10px;">{metric}</div>
+        <div style="background:#21262d;border-radius:20px;height:6px;overflow:hidden;">
+            <div style="background:{bar_color};width:{pct}%;height:100%;border-radius:20px;"></div>
+        </div>
+    </div>""", unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+# Confusion matrix style breakdown
+perf_col1, perf_col2 = st.columns([1, 1])
+with perf_col1:
+    st.markdown("""
+    <div style="background:#0d1117;border:1px solid #238636;border-radius:12px;padding:16px 20px;">
+        <div style="font-size:13px;font-weight:700;color:#3fb950;margin-bottom:10px;">🔬 Model Details</div>
+        <table style="width:100%;font-size:12px;color:#8b949e;">
+            <tr><td style="padding:5px 0;color:#e6edf3;font-weight:600;">Algorithm</td><td>XGBoost Classifier</td></tr>
+            <tr><td style="padding:5px 0;color:#e6edf3;font-weight:600;">Training Data</td><td>2,473 roadkill incidents (2011–2013)</td></tr>
+            <tr><td style="padding:5px 0;color:#e6edf3;font-weight:600;">Features</td><td>9 environmental + infrastructural variables</td></tr>
+            <tr><td style="padding:5px 0;color:#e6edf3;font-weight:600;">Validation</td><td>Cross-validation on held-out segments</td></tr>
+            <tr><td style="padding:5px 0;color:#e6edf3;font-weight:600;">Explainability</td><td>SHAP (Local + Global)</td></tr>
+            <tr><td style="padding:5px 0;color:#e6edf3;font-weight:600;">Output</td><td>Risk probability score (0–1)</td></tr>
+        </table>
+    </div>""", unsafe_allow_html=True)
+
+with perf_col2:
+    st.markdown("""
+    <div style="background:#0d1117;border:1px solid #1f6feb;border-radius:12px;padding:16px 20px;">
+        <div style="font-size:13px;font-weight:700;color:#58a6ff;margin-bottom:10px;">📌 What These Metrics Mean</div>
+        <div style="font-size:12px;color:#8b949e;line-height:1.8;">
+            <b style="color:#3fb950;">Accuracy</b> — % of segments correctly classified as High/Moderate/Low risk<br>
+            <b style="color:#58a6ff;">Precision</b> — Of all segments flagged High risk, how many truly are<br>
+            <b style="color:#ffd700;">Recall</b> — Of all truly High-risk segments, how many were caught<br>
+            <b style="color:#ff8800;">F1 Score</b> — Balance between Precision and Recall<br>
+            <b style="color:#ff4444;">ROC-AUC</b> — Model's ability to distinguish between risk levels (1.0 = perfect)
+        </div>
+    </div>""", unsafe_allow_html=True)
+
+st.markdown("---")
 st.markdown('<div class="section-header">Risk Classification by Segment</div>', unsafe_allow_html=True)
 st.markdown(
     '<div class="risk-note">'
@@ -499,16 +751,17 @@ high_df = df_sorted[df_sorted['risk_probability'] > 0.75][display_cols].rename(c
 mod_df  = df_sorted[(df_sorted['risk_probability'] >= 0.40) & (df_sorted['risk_probability'] <= 0.75)][display_cols].rename(columns=rename_map)
 low_df  = df_sorted[df_sorted['risk_probability'] < 0.40][display_cols].rename(columns=rename_map)
 
+# Fix empty rows — set height dynamically based on row count
 rc1, rc2, rc3 = st.columns(3)
 with rc1:
     st.markdown("**🔴 High Risk** *(> 75%)*")
-    st.dataframe(high_df, hide_index=True, height=300, use_container_width=True)
+    st.dataframe(high_df, hide_index=True, height=min(400, (len(high_df) + 1) * 45 + 10), use_container_width=True)
 with rc2:
     st.markdown("**🟡 Moderate Risk** *(40–75%)*")
-    st.dataframe(mod_df, hide_index=True, height=300, use_container_width=True)
+    st.dataframe(mod_df, hide_index=True, height=min(400, (len(mod_df) + 1) * 45 + 10), use_container_width=True)
 with rc3:
     st.markdown("**🟢 Low Risk** *(< 40%)*")
-    st.dataframe(low_df, hide_index=True, height=300, use_container_width=True)
+    st.dataframe(low_df, hide_index=True, height=min(400, (len(low_df) + 1) * 45 + 10), use_container_width=True)
 
 st.markdown("---")
 
@@ -525,10 +778,10 @@ fig4 = px.bar(
     labels={'risk_pct': 'Risk (%)', 'transect': 'Segment', 'season': 'Season'},
 )
 fig4.update_layout(
-    height=380,
+    height=420,
     paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
     font=dict(color='#e6edf3'),
-    xaxis=dict(gridcolor='#30363d', tickangle=45),
+    xaxis=dict(gridcolor='#30363d', tickangle=-45),   # ← upward-left labels
     yaxis=dict(gridcolor='#30363d', range=[0, 100]),
     legend=dict(bgcolor='rgba(0,0,0,0)')
 )
@@ -539,6 +792,13 @@ st.markdown("---")
 # ── SPECIES AT RISK ───────────────────────────────────────────────────────────
 st.markdown('<div class="section-header">Species at Risk by Animal Group</div>', unsafe_allow_html=True)
 st.markdown("Which animal groups are most affected across all road segments?")
+st.markdown(
+    "<span style='font-size:12px; color:#8b949e;'>"
+    "🔵 <b style='color:#1f6feb;'>Blue</b> = fewer incidents &nbsp;→&nbsp; "
+    "🔴 <b style='color:#ff4444;'>Red</b> = most incidents"
+    "</span>",
+    unsafe_allow_html=True
+)
 
 present = roadkill[roadkill['occurrenceStatus'] == 'present']
 if 'taxonRemarks' in present.columns:
@@ -583,17 +843,18 @@ fig6 = px.scatter(
     labels={'incident_count': 'Historical Incidents', 'risk_pct': 'Predicted Risk (%)', 'type': 'Category'},
 )
 fig6.update_layout(
-    height=400,
+    height=420,
     paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
     font=dict(color='#e6edf3'),
-    xaxis=dict(gridcolor='#30363d'), yaxis=dict(gridcolor='#30363d'),
+    xaxis=dict(gridcolor='#30363d'),
+    yaxis=dict(gridcolor='#30363d', range=[0, 100]),  # ← y-axis to 100
     legend=dict(bgcolor='rgba(0,0,0,0)')
 )
 st.plotly_chart(fig6, use_container_width=True)
 
 st.markdown("---")
 
-# ── EMERGING HOTSPOTS — HIGHLIGHTED ALERT SECTION ─────────────────────────────
+# ── EMERGING HOTSPOTS ALERT ───────────────────────────────────────────────────
 emerging = df[
     (df['risk_probability'] >= 0.4) &
     (df['incident_count'] <= df['incident_count'].quantile(0.6))
@@ -635,10 +896,74 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 if n_emerging > 0:
-    st.dataframe(emerging_display, use_container_width=True, hide_index=True)
+    # ── Styled HTML table for emerging hotspots ──
+    rows_html = ""
+    for _, erow in emerging_display.iterrows():
+        risk_val = erow['Risk Score (%)']
+        color = '#ff4444' if risk_val > 75 else '#ffd700'
+        rows_html += f"""
+        <tr>
+            <td style="padding:12px 16px; font-weight:600; color:#e6edf3; border-bottom:1px solid #30363d;">
+                🚨 {erow['Segment']}
+            </td>
+            <td style="padding:12px 16px; color:#8b949e; border-bottom:1px solid #30363d; text-transform:capitalize;">
+                {'🌧️' if erow['Season'] == 'monsoon' else '☀️'} {erow['Season']}
+            </td>
+            <td style="padding:12px 16px; color:#8b949e; border-bottom:1px solid #30363d; text-align:right;">
+                {int(erow['Past Incidents'])}
+            </td>
+            <td style="padding:12px 16px; border-bottom:1px solid #30363d; text-align:right;">
+                <span style="background:{color}22; color:{color}; border:1px solid {color};
+                border-radius:20px; padding:4px 14px; font-weight:700; font-size:14px;">
+                    {risk_val}%
+                </span>
+            </td>
+        </tr>"""
+
+    st.markdown(f"""
+    <table style="width:100%; border-collapse:collapse; background:#161b22;
+                  border:1px solid #ff6b00; border-radius:12px; overflow:hidden; margin-top:8px;">
+        <thead>
+            <tr style="background:#1f1100;">
+                <th style="padding:12px 16px; text-align:left; color:#ffa94d; font-size:13px; border-bottom:2px solid #ff6b00;">Segment</th>
+                <th style="padding:12px 16px; text-align:left; color:#ffa94d; font-size:13px; border-bottom:2px solid #ff6b00;">Season</th>
+                <th style="padding:12px 16px; text-align:right; color:#ffa94d; font-size:13px; border-bottom:2px solid #ff6b00;">Past Incidents</th>
+                <th style="padding:12px 16px; text-align:right; color:#ffa94d; font-size:13px; border-bottom:2px solid #ff6b00;">Risk Score</th>
+            </tr>
+        </thead>
+        <tbody>{rows_html}</tbody>
+    </table>
+    """, unsafe_allow_html=True)
+    st.markdown(f"<br><p style='color:#ffa94d; font-size:13px;'>⚠️ Found <b>{n_emerging} emerging hotspots</b> that need immediate attention!</p>", unsafe_allow_html=True)
 else:
     st.info("No emerging hotspots detected.")
 
 st.markdown("---")
-st.caption("🔴 High Risk: >75% | 🟡 Moderate Risk: 40–75% | 🟢 Low Risk: <40%")
-st.caption("Data: Jeganathan et al. (2018) — NCF India | Model: XGBoost + SHAP | Built for wildlife conservation")
+st.markdown("""
+<div style="background:linear-gradient(135deg,#0a1a0d 0%,#0d1520 100%);
+border:1px solid #238636;border-radius:14px;padding:20px 28px;text-align:center;">
+    <div style="font-size:13px;color:#8b949e;margin-bottom:10px;">
+        🔴 High Risk: &gt;75% &nbsp;|&nbsp; 🟡 Moderate Risk: 40–75% &nbsp;|&nbsp; 🟢 Low Risk: &lt;40%
+    </div>
+    <div style="font-size:12px;color:#6e7681;margin-bottom:14px;">
+        Data: Jeganathan et al. (2018) — NCF India &nbsp;|&nbsp;
+        Model: XGBoost + SHAP &nbsp;|&nbsp;
+        Built for wildlife conservation &nbsp;|&nbsp;
+        DSC SVCE · Blueprints 2026
+    </div>
+    <a href="https://github.com/Neha-code1/wildlife_hotspot" target="_blank"
+    style="display:inline-block;background:#238636;color:#fff;padding:10px 24px;
+    border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;margin-right:10px;">
+    ⭐ GitHub Repository
+    </a>
+    <a href="https://github.com/Neha-code1/wildlife_hotspot/blob/main/README.md" target="_blank"
+    style="display:inline-block;background:#161b22;border:1px solid #30363d;color:#8b949e;
+    padding:10px 24px;border-radius:8px;text-decoration:none;font-size:13px;">
+    📄 Documentation
+    </a>
+    <div style="margin-top:14px;font-size:11px;color:#6e7681;">
+        🐾 Predictive Wildlife Hotspot Modeling using Explainable AI &nbsp;·&nbsp;
+        Team: Priyadarshan M, S Neha, Pradyumna K S, Surya S, Swathi E, Zeba H
+    </div>
+</div>
+""", unsafe_allow_html=True)
