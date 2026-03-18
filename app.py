@@ -250,25 +250,25 @@ st.markdown("""
     <div style="margin-top:16px;">
         <div style="font-size:12px;color:#8b949e;margin-bottom:10px;">🌐 <b style="color:#e6edf3;">Supports UN SDGs:</b></div>
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
-            <div style="background:#0d1a10;border:1px solid #3f7e44;border-radius:10px;padding:10px 12px;">
-                <span style="background:#3f7e44;color:#fff;border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;">SDG 15</span>
-                <div style="font-size:12px;color:#e6edf3;font-weight:600;margin:6px 0 2px;">Life on Land</div>
-                <div style="font-size:11px;color:#6abf69;line-height:1.4;">Protects terrestrial wildlife &amp; forest biodiversity</div>
+            <div style="background:linear-gradient(135deg,#0f2a0a 0%,#1a4a0d 100%);border:1px solid #4c9f38;border-radius:10px;padding:12px 14px;">
+                <span style="background:#4c9f38;color:#fff;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;">SDG 15</span>
+                <div style="font-size:13px;color:#e6edf3;font-weight:700;margin:8px 0 4px;">Life on Land</div>
+                <div style="font-size:11px;color:#a8d5a2;line-height:1.5;">Protects terrestrial wildlife &amp; forest biodiversity</div>
             </div>
-            <div style="background:#1a0e08;border:1px solid #fd6925;border-radius:10px;padding:10px 12px;">
-                <span style="background:#fd6925;color:#fff;border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;">SDG 11</span>
-                <div style="font-size:12px;color:#e6edf3;font-weight:600;margin:6px 0 2px;">Sustainable Cities</div>
-                <div style="font-size:11px;color:#ffa07a;line-height:1.4;">Safer road infrastructure near forest zones</div>
+            <div style="background:linear-gradient(135deg,#1a1200 0%,#2e1f00 100%);border:1px solid #fd9d24;border-radius:10px;padding:12px 14px;">
+                <span style="background:#fd9d24;color:#fff;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;">SDG 11</span>
+                <div style="font-size:13px;color:#e6edf3;font-weight:700;margin:8px 0 4px;">Sustainable Cities</div>
+                <div style="font-size:11px;color:#ffc97a;line-height:1.5;">Safer road infrastructure near forest zones</div>
             </div>
-            <div style="background:#0d1a10;border:1px solid #3f7e44;border-radius:10px;padding:10px 12px;">
-                <span style="background:#3f7e44;color:#fff;border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;">SDG 13</span>
-                <div style="font-size:12px;color:#e6edf3;font-weight:600;margin:6px 0 2px;">Climate Action</div>
-                <div style="font-size:11px;color:#6abf69;line-height:1.4;">Reduces habitat fragmentation &amp; species vulnerability</div>
+            <div style="background:linear-gradient(135deg,#001a10 0%,#003320 100%);border:1px solid #3f7e44;border-radius:10px;padding:12px 14px;">
+                <span style="background:#3f7e44;color:#fff;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;">SDG 13</span>
+                <div style="font-size:13px;color:#e6edf3;font-weight:700;margin:8px 0 4px;">Climate Action</div>
+                <div style="font-size:11px;color:#6abf69;line-height:1.5;">Reduces habitat fragmentation &amp; species vulnerability</div>
             </div>
-            <div style="background:#0d1a10;border:1px solid #4c9f38;border-radius:10px;padding:10px 12px;">
-                <span style="background:#4c9f38;color:#fff;border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;">SDG 3</span>
-                <div style="font-size:12px;color:#e6edf3;font-weight:600;margin:6px 0 2px;">Good Health &amp; Wellbeing</div>
-                <div style="font-size:11px;color:#90ee90;line-height:1.4;">Reduces human injury from animal-vehicle collisions</div>
+            <div style="background:linear-gradient(135deg,#001520 0%,#002a40 100%);border:1px solid #26bde2;border-radius:10px;padding:12px 14px;">
+                <span style="background:#26bde2;color:#fff;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;">SDG 3</span>
+                <div style="font-size:13px;color:#e6edf3;font-weight:700;margin:8px 0 4px;">Good Health &amp; Wellbeing</div>
+                <div style="font-size:11px;color:#7dd8f0;line-height:1.5;">Reduces human injury from animal-vehicle collisions</div>
             </div>
         </div>
     </div>
@@ -289,7 +289,7 @@ border-radius:14px;padding:20px 28px;margin-bottom:8px;">
     <div style="font-size:13px;font-weight:700;color:#3fb950;margin-bottom:4px;">Step 1 — Explore the Map</div>
     <div style="font-size:12px;color:#8b949e;line-height:1.6;">Start with the <b style="color:#e6edf3;">Interactive Hotspot Map</b>.
     Click any circle marker to see the risk level and total incidents for that road segment.
-    Larger circles = higher risk. Colors: 🔴 Red = High, 🟡 Yellow = Moderate, 🟢 Green = Low.</div>
+    Larger circles = higher risk. Colors: 🟢 Green = Low, 🟡 Yellow = Moderate, 🔴 Red = High.</div>
   </div>
 
   <div style="background:#0d1117;border:1px solid #1f6feb;border-radius:10px;padding:14px 16px;">
