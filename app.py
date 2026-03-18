@@ -379,11 +379,11 @@ def make_table(rows, header_bg, header_color, row_hover):
         </tr></thead><tbody>{rows_html}</tbody></table>"""
 
 with tc1:
-    st.markdown("**🌿 All Segments** *(sorted by total incidents)*")
+    st.markdown("<div style='height:28px;font-weight:700;font-size:14px;color:#e6edf3;display:flex;align-items:center;'>🌿 All Segments <span style='font-size:12px;color:#8b949e;font-weight:400;margin-left:6px;font-style:italic;'>(sorted by total incidents)</span></div>", unsafe_allow_html=True)
     all_rows_html = ""
     for i, r in seg_incidents.iterrows():
         all_rows_html += f"<tr><td style='padding:8px 14px;color:#8b949e;border-bottom:1px solid rgba(255,255,255,0.05);font-size:12px;'>{i}</td><td style='padding:8px 14px;color:#e6edf3;border-bottom:1px solid rgba(255,255,255,0.05);font-size:12px;'>{r['Segment']}</td><td style='padding:8px 14px;color:#58a6ff;border-bottom:1px solid rgba(255,255,255,0.05);font-size:12px;text-align:right;font-weight:600;'>{int(r['Total Incidents'])}</td></tr>"
-    st.markdown(f"""<table class="inc-table" style="background:#0d1117;border:1px solid #1f6feb33;border-radius:10px;overflow:hidden;width:100%;">
+    st.markdown(f"""<table class="inc-table" style="background:#0d1117;border:1px solid #1f6feb33;border-radius:10px;overflow:hidden;width:100%;margin-top:8px;">
         <thead><tr style="background:#0d1a2a;">
             <th style="padding:10px 14px;text-align:left;color:#58a6ff;border-bottom:1px solid #1f6feb44;">#</th>
             <th style="padding:10px 14px;text-align:left;color:#58a6ff;border-bottom:1px solid #1f6feb44;">Segment</th>
@@ -391,12 +391,12 @@ with tc1:
         </tr></thead><tbody>{all_rows_html}</tbody></table>""", unsafe_allow_html=True)
 
 with tc2:
-    st.markdown("**🔴 Highest Incident Areas**")
-    st.markdown(make_table(top5, '#ff4444', '#ff6b6b', '#ff444411'), unsafe_allow_html=True)
+    st.markdown("<div style='height:28px;font-weight:700;font-size:14px;color:#e6edf3;display:flex;align-items:center;'>🔴 Highest Incident Areas</div>", unsafe_allow_html=True)
+    st.markdown("<div style='margin-top:8px;'>" + make_table(top5, '#ff4444', '#ff6b6b', '#ff444411') + "</div>", unsafe_allow_html=True)
 
 with tc3:
-    st.markdown("**🟢 Lowest Incident Areas**")
-    st.markdown(make_table(bottom5, '#238636', '#3fb950', '#23863611'), unsafe_allow_html=True)
+    st.markdown("<div style='height:28px;font-weight:700;font-size:14px;color:#e6edf3;display:flex;align-items:center;'>🟢 Lowest Incident Areas</div>", unsafe_allow_html=True)
+    st.markdown("<div style='margin-top:8px;'>" + make_table(bottom5, '#238636', '#3fb950', '#23863611') + "</div>", unsafe_allow_html=True)
 
 st.markdown("---")
 
@@ -418,8 +418,16 @@ transect_coords = {
 st.markdown('<div class="section-header">Interactive Hotspot Map</div>', unsafe_allow_html=True)
 st.markdown("Click any marker to see risk details. Larger circles = higher risk. 🟢 Green = low &nbsp;|&nbsp; 🟡 Yellow = moderate &nbsp;|&nbsp; 🔴 Red = high.")
 
-m = folium.Map(location=[10.335, 76.940], zoom_start=13, tiles='CartoDB dark_matter',
-               zoom_control=True, scrollWheelZoom=True)
+m = folium.Map(
+    location=[10.335, 76.938],
+    zoom_start=12,
+    tiles='CartoDB dark_matter',
+    zoom_control=True,
+    scrollWheelZoom=False,   # prevents accidental zoom while scrolling page
+    dragging=True,
+    min_zoom=11,
+    max_zoom=16
+)
 df_map = df.groupby('transect')['risk_probability'].max().reset_index()
 
 for _, row in df_map.iterrows():
@@ -443,7 +451,13 @@ for _, row in df_map.iterrows():
         tooltip=f"{name} — {risk:.0%} risk"
     ).add_to(m)
 
-st_folium(m, width=None, height=450)
+# Fit map to show all markers
+all_coords = list(transect_coords.values())
+sw = [min(c[0] for c in all_coords) - 0.01, min(c[1] for c in all_coords) - 0.01]
+ne = [max(c[0] for c in all_coords) + 0.01, max(c[1] for c in all_coords) + 0.01]
+m.fit_bounds([sw, ne])
+
+st_folium(m, width=None, height=500)
 st.markdown("---")
 
 # ── INSPECT A SEGMENT ─────────────────────────────────────────────────────────
@@ -492,48 +506,39 @@ if len(row) > 0:
         st.markdown("**SHAP Waterfall — How each feature builds the final score**")
         base_val   = 0.5
         shap_df_wf = shap_df[shap_df['shap_value'].abs() > 0.001].sort_values('shap_value')
-        
-        # Build proper waterfall from base
+
         cumulative = base_val
-        wf_data = []
+        wf_features, wf_starts, wf_values, wf_colors = [], [], [], []
         for _, wrow in shap_df_wf.iterrows():
-            wf_data.append({
-                'feature': wrow['feature'],
-                'start': cumulative,
-                'end': cumulative + wrow['shap_value'],
-                'value': wrow['shap_value'],
-                'color': '#ff4444' if wrow['shap_value'] > 0 else '#58a6ff'
-            })
+            wf_features.append(wrow['feature'])
+            wf_starts.append(cumulative)
+            wf_values.append(wrow['shap_value'])
+            wf_colors.append('#ff4444' if wrow['shap_value'] > 0 else '#58a6ff')
             cumulative += wrow['shap_value']
 
-        fig_wf = go.Figure()
-        # Base marker
-        fig_wf.add_trace(go.Scatter(
-            x=[base_val], y=[-0.5],
-            mode='markers', marker=dict(color='#8b949e', size=8, symbol='line-ew'),
-            showlegend=False, hoverinfo='skip'
+        fig_wf = go.Figure(go.Bar(
+            x=wf_values,
+            y=wf_features,
+            base=wf_starts,
+            orientation='h',
+            marker_color=wf_colors,
+            text=[f"{v:+.3f}" for v in wf_values],
+            textposition='outside',
+            textfont=dict(size=11)
         ))
-        for d in wf_data:
-            fig_wf.add_trace(go.Bar(
-                x=[d['end'] - d['start']], y=[d['feature']],
-                base=[d['start']], orientation='h',
-                marker_color=d['color'], showlegend=False,
-                text=f"{d['value']:+.3f}", textposition='outside',
-                textfont=dict(size=11)
-            ))
         fig_wf.add_vline(x=base_val, line_dash="dash", line_color="#8b949e", line_width=1.5,
-                         annotation_text=f"Base {base_val}", annotation_font_size=10,
+                         annotation_text=f"Base 0.5", annotation_font_size=10,
                          annotation_position="top right")
         fig_wf.add_vline(x=score, line_dash="dot", line_color="#ffd700", line_width=2,
                          annotation_text=f"Final {score:.0%}", annotation_font_size=10,
                          annotation_position="bottom right")
         fig_wf.update_layout(
-            height=max(300, len(wf_data) * 50),
-            xaxis=dict(range=[0, 1.05], gridcolor='#30363d', title='Risk Score',
+            height=max(300, len(wf_features) * 52),
+            xaxis=dict(range=[0, 1.1], gridcolor='#30363d', title='Risk Score',
                        tickformat='.0%', tickvals=[0, 0.25, 0.5, 0.75, 1.0]),
+            yaxis=dict(gridcolor='#30363d'),
             paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
-            font=dict(color='#e6edf3'), margin=dict(l=10, r=60, t=30, b=40),
-            barmode='overlay', bargap=0.3
+            font=dict(color='#e6edf3'), margin=dict(l=10, r=70, t=30, b=40),
         )
         st.plotly_chart(fig_wf, use_container_width=True)
 
