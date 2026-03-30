@@ -159,12 +159,9 @@ with st.sidebar:
     st.markdown("2,473 roadkill incidents across 11 transects")
     st.markdown("---")
     st.markdown("**Team Members**")
-    st.markdown("Priyadarshan M")
     st.markdown("S Neha")
-    st.markdown("Pradyumna Koyiyalam Sriram")
-    st.markdown("Surya S")
-    st.markdown("Swathi E")
-    st.markdown("Zeba H")
+    st.markdown("Ritika S")
+    st.markdown("Sugantha G")
     st.markdown("---")
     st.markdown("**Project**")
     st.markdown("Predictive Wildlife Hotspot Modeling using Explainable AI")
@@ -1089,7 +1086,7 @@ border:1px solid #238636;border-radius:14px;padding:20px 28px;text-align:center;
     </a>
     <div style="margin-top:14px;font-size:11px;color:#c9d1d9;">
         🐾 Predictive Wildlife Hotspot Modeling using Explainable AI &nbsp;·&nbsp;
-        Team: Priyadarshan M, S Neha, Pradyumna K S, Surya S, Swathi E, Zeba H
+        Team: S Neha, Ritika S, Sugantha G
     </div>
 </div>
 """, unsafe_allow_html=True)
