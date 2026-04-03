@@ -160,8 +160,11 @@ with st.sidebar:
     st.markdown("---")
     st.markdown("**Team Members**")
     st.markdown("S Neha")
-    st.markdown("Ritika S")
-    st.markdown("Sugantha G")
+    st.markdown("Swathi E")
+    st.markdown("Priyadarshan M")
+    st.markdown("Pradyumna Kouiyalam Sriram")
+    st.markdown("Surya")
+    st.markdown("Zeba H")
     st.markdown("---")
     st.markdown("**Project**")
     st.markdown("Predictive Wildlife Hotspot Modeling using Explainable AI")
@@ -1086,7 +1089,7 @@ border:1px solid #238636;border-radius:14px;padding:20px 28px;text-align:center;
     </a>
     <div style="margin-top:14px;font-size:11px;color:#c9d1d9;">
         🐾 Predictive Wildlife Hotspot Modeling using Explainable AI &nbsp;·&nbsp;
-        Team: S Neha, Ritika S, Sugantha G
+        Team: S Neha · Swathi E · Priyadarshan M · Pradyumna Kouiyalam Sriram · Surya · Zeba H
     </div>
 </div>
 """, unsafe_allow_html=True)
