@@ -7,8 +7,11 @@
 
 ## 👥 Team Members
 - S Neha
-- Ritika S
-- Sugantha G
+- Swathi E
+- Priyadarshan M
+- Pradyumna Kouiyalam Sriram
+- Surya 
+- Zeba H
 
 ## 🌍 Overview
 Highways cutting through forest reserves cause thousands of animal-vehicle collisions every year. This system uses XGBoost and SHAP to forecast where future wildlife-vehicle collisions will occur before they happen.
