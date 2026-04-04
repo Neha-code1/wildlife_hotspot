@@ -58,3 +58,8 @@ tzdata==2025.3
 urllib3==2.6.3
 xgboost==3.2.0
 xyzservices==2025.11.0
+ultralytics==8.3.0
+opencv-python-headless==4.10.0.84
+opencv-python-headless
+ultralytics
+pillow
