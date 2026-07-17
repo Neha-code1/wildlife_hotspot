@@ -4,6 +4,7 @@ bcrypt
 pandas
 numpy
 plotly
+plotly-express
 opencv-python-headless
 ultralytics
 pillow
@@ -11,3 +12,5 @@ pyttsx3
 xgboost
 shap
 scikit-learn
+folium
+streamlit-folium
