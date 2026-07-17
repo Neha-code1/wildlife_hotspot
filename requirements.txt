@@ -2,7 +2,12 @@ streamlit
 twilio
 bcrypt
 pandas
+numpy
+plotly
 opencv-python-headless
 ultralytics
 pillow
 pyttsx3
+xgboost
+shap
+scikit-learn
