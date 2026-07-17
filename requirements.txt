@@ -7,7 +7,6 @@ plotly
 opencv-python-headless
 ultralytics
 pillow
-pyttsx3
 xgboost
 shap
 scikit-learn
