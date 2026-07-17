@@ -3,15 +3,30 @@ import tempfile
 import pandas as pd
 import streamlit as st
 from PIL import Image
-from ultralytics import YOLO
+try:
+    from ultralytics import YOLO
+    YOLO_AVAILABLE = True
+except Exception as e:
+    YOLO_AVAILABLE = False
+    YOLO_ERROR = str(e)
 
 try:
     import cv2
 except ImportError:
     cv2 = None
+    @st.cache_resource
+def load_yolo_model(weights_path="models/best.pt"):
+    if not YOLO_AVAILABLE:
+        st.error(f"YOLO unavailable: {YOLO_ERROR}")
+        st.stop()
 
-@st.cache_resource
-def load_yolo_model(weights_path: str = "models/best.pt"):
+    weights = Path(weights_path)
+    if weights.exists():
+        return YOLO(str(weights))
+    return YOLO("yolov8n.pt")
+
+
+
     weights = Path(weights_path)
     if weights.exists():
         return YOLO(str(weights))
