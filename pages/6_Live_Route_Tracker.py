@@ -193,3 +193,4 @@ else:
             st.markdown(f"**{i+1}.** 🟡 {seg['transect']} — {risk_pct}% risk")
         else:
             st.markdown(f"**{i+1}.** 🟢 {seg['transect']} — {risk_pct}% risk")
+            #final

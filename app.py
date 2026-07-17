@@ -163,3 +163,4 @@ with st.sidebar:
     st.markdown("**Pages found:**")
     for f in sorted(actual_files):
         if f.endswith('.py'): st.markdown(f"✅ `{f}`")
+        #final

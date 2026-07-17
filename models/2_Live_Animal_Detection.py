@@ -87,3 +87,4 @@ else:
         st.subheader("Sampled detection frames")
         for item in frames[:6]:
             st.image(item["image"], caption=f"Frame {item['frame_no']}", use_container_width=True)
+            #final

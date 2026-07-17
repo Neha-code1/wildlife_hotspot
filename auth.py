@@ -50,3 +50,4 @@ def logout():
     for key in ["logged_in", "username", "role"]:
         if key in st.session_state:
             del st.session_state[key]
+            #final

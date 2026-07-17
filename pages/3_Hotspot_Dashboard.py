@@ -253,3 +253,5 @@ if len(emerging)>0:
         else: st.warning(f"⚠️ **{erow['transect']}** ({erow['season']}) — {risk_pct:.1f}% risk | {int(erow['incident_count'])} past incidents")
 else:
     st.info("No emerging hotspots detected.")
+    #final
+    
